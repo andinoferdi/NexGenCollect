@@ -25,7 +25,7 @@
                     </svg>
                 </span>
             </div>
-            <a href="{{ asset('index.html') }}" class="d-flex align-items-center">
+            <a href="{{ route('dashboard') }}" class="d-flex align-items-center">
                 <img alt="Logo" src="{{ asset('assets/media/logos/logo-demo7.svg') }}" class="h-30px" />
             </a>
         </div>

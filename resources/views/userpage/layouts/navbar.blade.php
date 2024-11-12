@@ -60,8 +60,23 @@
                 </div>
             </div>
             <div class="flex-equal text-end ms-1">
-                <a href="{{ route('login') }}" class="btn btn-success">Sign In</a>
+                @if (auth()->check())
+                    @php
+                        $userRole = auth()->user()->role_id;
+                    @endphp
+                    @if ($userRole == 1 || $userRole == 3)
+                        <a href="{{ route('dashboard') }}" class="btn btn-primary">Dashboard</a>
+                    @else
+                        <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Sign Out</button>
+                        </form>
+                    @endif
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-success">Sign In</a>
+                @endif
             </div>
+
         </div>
     </div>
 </div>
