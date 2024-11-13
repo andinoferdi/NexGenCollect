@@ -9,38 +9,21 @@ class SettingMenusSeeder extends Seeder
 {
     public function run()
     {
-        // Hapus semua data sebelumnya
         DB::table('setting_menus')->truncate();
 
-        // Menentukan role dan akses menu serta submenu yang dimiliki
-        $menuAssignments = [
-            1 => [ // Admin
-                'menus' => [
-                    1 => [null, 1, 2, 3, 4, 5], // menu_id => [submenu_id, ...]
-                ],
-            ],
-            2 => [ // Kolektor
-                'menus' => [
-                    1 => [null, 1, 3], // Kolektor memiliki akses terbatas
-                ],
-            ],
-            3 => [ // Seniman
-                'menus' => [
-                    1 => [null, 2, 4], // Seniman memiliki akses ke beberapa submenu
-                ],
-            ],
+        // Data untuk role_id dan menu_id yang ingin disetting
+        $settingMenus = [
+            // Role 1 (Admin) - Admin dapat mengakses semua menu
+            ['role_id' => 1, 'menu_id' => 1],  // Hanya menu "Master"
+
+            // Role 2 (Kolektor) - Kolektor hanya dapat mengakses "Master"
+            ['role_id' => 2, 'menu_id' => 1],  // Hanya menu "Master"
+
+            // Role 3 (Seniman) - Seniman hanya dapat mengakses "Master"
+            ['role_id' => 3, 'menu_id' => 1],  // Hanya menu "Master"
         ];
 
-        foreach ($menuAssignments as $roleId => $assignment) {
-            foreach ($assignment['menus'] as $menuId => $submenuIds) {
-                foreach ($submenuIds as $submenuId) {
-                    DB::table('setting_menus')->insert([
-                        'role_id' => $roleId,
-                        'menu_id' => $menuId,
-                        'submenu_id' => $submenuId,
-                    ]);
-                }
-            }
-        }
+        // Menambahkan semua data ke dalam tabel setting_menus
+        DB::table('setting_menus')->insert($settingMenus);
     }
 }

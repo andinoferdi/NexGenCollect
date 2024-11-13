@@ -88,7 +88,7 @@
                                         </div>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link active" href="{{ route('dashboard') }}">
+                                        <a class="menu-link {{ request()->is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                                             <span class="menu-icon">
                                                 <i class="fas fa-tachometer-alt"></i>
                                             </span>
@@ -96,7 +96,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link" href="{{ route('userpage') }}">
+                                        <a class="menu-link {{ request()->is('dashboard/userpage') ? 'active' : '' }}" href="{{ route('userpage') }}">
                                             <span class="menu-icon">
                                                 <i class="fas fa-home"></i>
                                             </span>
@@ -105,38 +105,44 @@
                                     </div>
                                     @php
                                         $role_id = auth()->user()->role_id;
-                                        $menus = App\Models\Menu::whereHas('settingMenus', function ($query) use (
-                                            $role_id,
-                                        ) {
+                                        $menus = App\Models\Menu::whereHas('settingMenus', function ($query) use ($role_id) {
                                             $query->where('role_id', $role_id);
                                         })->get();
                                     @endphp
                                     @foreach ($menus as $menu)
-                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                            <span class="menu-link">
-                                                <span class="menu-icon">
-                                                    <i class="{{ $menu->icon_menu }}"></i>
-                                                </span>
-                                                <span class="menu-title">{{ $menu->nama_menu }}</span>
-                                                <span class="menu-arrow"></span>
-                                            </span>
-                                            @if ($menu->submenus->count() > 0)
-                                                <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                                    @foreach ($menu->submenus as $submenu)
-                                                        <div class="menu-item">
-                                                            <a class="menu-link"
-                                                                href="{{ url('dashboard/' . $submenu->link_submenu) }}">
-                                                                <span class="menu-bullet">
-                                                                    <span class="bullet bullet-dot"></span>
-                                                                </span>
-                                                                <span
-                                                                    class="menu-title">{{ $submenu->nama_submenu }}</span>
-                                                            </a>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            @endif
-                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is('dashboard/*') ? 'menu-active' : '' }}">
+    <span class="menu-link {{ request()->is('dashboard/*') ? 'active' : '' }}">
+        <span class="menu-icon">
+            <i class="{{ $menu->icon_menu }}"></i>
+        </span>
+        <span class="menu-title">{{ $menu->nama_menu }}</span>
+        <span class="menu-arrow"></span>
+    </span>
+    @if ($menu->submenus->count() > 0)
+        <div class="menu-sub menu-sub-accordion {{ request()->is('dashboard/*') ? 'menu-active-bg' : '' }}">
+            @foreach ($menu->submenus as $submenu)
+                @php
+                    $hasAccess = App\Models\SettingSubmenu::where('role_id', $role_id)
+                        ->where('menu_id', $menu->id)
+                        ->where('submenu_id', $submenu->id)
+                        ->exists();
+                @endphp
+                @if ($hasAccess)
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('dashboard/' . $submenu->link_submenu) ? 'active' : '' }}"
+                            href="{{ url('dashboard/' . $submenu->link_submenu) }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">{{ $submenu->nama_submenu }}</span>
+                        </a>
+                    </div>
+                @endif
+            @endforeach
+        </div>
+    @endif
+</div>
+
                                     @endforeach
                                 </div>
                             </div>

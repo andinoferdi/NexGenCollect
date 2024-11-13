@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\SettingSubmenu;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
         MenusSeeder::class,
         SubmenusSeeder::class,
         SettingMenusSeeder::class,
+        SettingSubmenusSeeder::class,
     ]);
 }
 

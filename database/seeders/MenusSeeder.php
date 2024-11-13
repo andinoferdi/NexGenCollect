@@ -12,6 +12,8 @@ class MenusSeeder extends Seeder
         DB::table('menus')->insert([
             'nama_menu' => 'Master',
             'icon_menu' => 'fas fa-cogs',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

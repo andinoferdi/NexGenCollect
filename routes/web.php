@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SubmenuController;
 use App\Http\Controllers\SettingMenuController;
+use App\Http\Controllers\SettingSubmenuController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,5 +27,6 @@ Route::prefix('dashboard')->middleware('auth.custom')->group(function () {
     Route::resource('menu', MenuController::class);
     Route::resource('submenu', SubmenuController::class);
     Route::resource('setting_menus', SettingMenuController::class);
+    Route::resource('setting_submenus', SettingSubmenuController::class);
 });
 

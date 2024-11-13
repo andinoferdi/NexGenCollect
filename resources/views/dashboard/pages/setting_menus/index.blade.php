@@ -23,7 +23,6 @@
                                 <tr class="fw-bolder text-muted">
                                     <th class="min-w-150px">Role</th>
                                     <th class="min-w-150px">Menu</th>
-                                    <th class="min-w-150px">Submenus</th>
                                     <th class="min-w-100px text-end">Actions</th>
                                 </tr>
                             </thead>
@@ -33,15 +32,8 @@
                                         <tr>
                                             <td>{{ $menuSettings->first()->role->nama_role }}</td>
                                             <td>{{ $menuSettings->first()->menu->nama_menu }}</td>
-                                            <td>
-                                                @foreach($menuSettings as $setting)
-                                                    @if($setting->submenu)
-                                                        <span class="badge badge-light-primary">{{ $setting->submenu->nama_submenu }}</span>
-                                                    @endif
-                                                @endforeach
-                                            </td>
                                             <td class="text-end">
-                                                <a href="{{ route('setting_menus.edit', $menuSettings->first()->id) }}" class="btn btn-icon btn-light btn-sm me-1 text-primary">
+                                                <a href="{{ route('setting_menus.edit', $menuSettings->first()->role_id) }}" class="btn btn-icon btn-light btn-sm me-1 text-primary">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
                                                 <form action="{{ route('setting_menus.destroy', $menuSettings->first()->id) }}" method="POST" style="display:inline;">
