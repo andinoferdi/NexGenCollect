@@ -26,26 +26,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($menus as $menu)
+                                @foreach ($menus as $menu)
                                     <tr>
                                         <td>{{ $menu->nama_menu }}</td>
                                         <td class="text-end">
-                                            <a href="{{ route('menu.edit', $menu->id) }}" class="btn btn-icon btn-light btn-sm me-1 text-primary">
+                                            <a href="{{ route('menu.edit', $menu->id) }}"
+                                                class="btn btn-icon btn-light btn-sm me-1 text-primary">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <form action="{{ route('menu.destroy', $menu->id) }}" method="POST" style="display:inline;">
+                                            <form action="{{ route('menu.destroy', $menu->id) }}" method="POST"
+                                                style="display:inline;" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-icon btn-light btn-sm text-danger">
+                                                <button type="button"
+                                                    class="btn btn-icon btn-light btn-sm text-danger delete-button">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
-                                            <a href="{{ route('submenu.create', $menu->id) }}" class="btn btn-icon btn-light btn-sm text-secondary" title="Add Submenu">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
                                         </td>
                                     </tr>
-                                 
                                 @endforeach
                             </tbody>
                         </table>

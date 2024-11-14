@@ -33,22 +33,22 @@ class LoginController extends Controller
     }
 
     public function register(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
+{
+    $request->validate([
+        'name' => 'required|max:255',
+        'email' => 'required|email|max:255|unique:users',
+        'password' => 'required|confirmed|min:6',
+    ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+    ]);
 
+    return redirect()->route('login')->with('success', 'Registrasi berhasil! Silahkan login.');
+}
 
-        return redirect()->route('login');
-    }
 
     public function logout()
     {

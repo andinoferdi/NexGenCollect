@@ -28,5 +28,10 @@ Route::prefix('dashboard')->middleware('auth.custom')->group(function () {
     Route::resource('submenu', SubmenuController::class);
     Route::resource('setting_menus', SettingMenuController::class);
     Route::resource('setting_submenus', SettingSubmenuController::class);
+    Route::get('/account/setting', [DashboardController::class, 'accountsetting'])->name('account_setting');
+    Route::put('/dashboard/account/update/{user}', [DashboardController::class, 'updateprofile'])->name('updateprofile');
+
+
+
 });
 

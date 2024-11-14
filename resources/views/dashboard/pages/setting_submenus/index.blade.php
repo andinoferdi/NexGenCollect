@@ -28,19 +28,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($settings as $setting)
+                                @foreach ($settings as $role_id => $groupedSettings)
                                     <tr>
-                                        <td>{{ $setting->role->nama_role }}</td>
-                                        <td>{{ $setting->menu->nama_menu }}</td>
-                                        <td>{{ $setting->submenu->nama_submenu }}</td>
+                                        <td>{{ $groupedSettings->first()->role->nama_role }}</td>
+                                        <td>
+                                            @foreach ($groupedSettings as $setting)
+                                                {{ $setting->menu->nama_menu }}<br>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @foreach ($groupedSettings as $setting)
+                                                {{ $setting->submenu->nama_submenu }}<br>
+                                            @endforeach
+                                        </td>
                                         <td class="text-end">
-                                            <a href="{{ route('setting_submenus.edit', $setting->id) }}" class="btn btn-icon btn-light btn-sm me-1 text-primary">
+                                            <a href="{{ route('setting_submenus.edit', $role_id) }}"
+                                                class="btn btn-icon btn-light btn-sm me-1 text-primary">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <form action="{{ route('setting_submenus.destroy', $setting->id) }}" method="POST" style="display:inline;">
+                                            <form action="{{ route('setting_submenus.destroy', $role_id) }}" method="POST"
+                                                style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-icon btn-light btn-sm text-danger">
+                                                <button type="button"
+                                                    class="btn btn-icon btn-light btn-sm text-danger delete-button">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>

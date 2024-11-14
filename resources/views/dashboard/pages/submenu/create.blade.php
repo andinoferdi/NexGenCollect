@@ -15,14 +15,23 @@
                             <option value="{{ $menu->id }}">{{ $menu->nama_menu }}</option>
                         @endforeach
                     </select>
+                    @error('menu_id')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Submenu Name</label>
                     <input type="text" name="nama_submenu" class="form-control" required>
+                    @error('nama_submenu')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Link</label>
                     <input type="text" name="link_submenu" class="form-control" required>
+                    @error('link_submenu')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Icon (Optional)</label>

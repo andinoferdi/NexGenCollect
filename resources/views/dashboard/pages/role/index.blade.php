@@ -26,17 +26,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($roles as $role)
+                                @foreach ($roles as $role)
                                     <tr>
                                         <td>{{ $role->nama_role }}</td>
                                         <td class="text-end">
-                                            <a href="{{ route('role.edit', $role->id) }}" class="btn btn-icon btn-light btn-sm me-1 text-primary">
+                                            <a href="{{ route('role.edit', $role->id) }}"
+                                                class="btn btn-icon btn-light btn-sm me-1 text-primary">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <form action="{{ route('role.destroy', $role->id) }}" method="POST" style="display:inline;">
+                                            <form action="{{ route('role.destroy', $role->id) }}" method="POST"
+                                                style="display:inline;" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-icon btn-light btn-sm text-danger">
+                                                <button type="button"
+                                                    class="btn btn-icon btn-light btn-sm text-danger delete-button">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>

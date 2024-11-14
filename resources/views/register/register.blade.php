@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body id="kt_body" class="bg-dark">
@@ -20,15 +21,17 @@
                     <img alt="Logo" src="{{ asset('assets/media/logos/logo-2.svg') }}" class="h-40px" />
                 </a>
                 <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+                    <!-- Display All Errors -->
                     @if ($errors->any())
                         <div class="alert alert-danger">
-                            <ul>
+                            <ul class="mb-0">
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
                         </div>
                     @endif
+
                     <form method="POST" action="{{ route('register') }}" class="form w-100" novalidate="novalidate">
                         @csrf
                         <div class="text-center mb-10">
@@ -37,6 +40,8 @@
                                 <a href="{{ route('login') }}" class="link-primary fw-bolder">Sign In</a>
                             </div>
                         </div>
+
+                        <!-- Name Field -->
                         <div class="fv-row mb-10">
                             <label class="form-label fs-6 fw-bolder text-dark">Name</label>
                             <input class="form-control form-control-lg form-control-solid" type="text" name="name"
@@ -45,6 +50,8 @@
                                 <div class="text-danger mt-2">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <!-- Email Field -->
                         <div class="fv-row mb-10">
                             <label class="form-label fs-6 fw-bolder text-dark">Email</label>
                             <input class="form-control form-control-lg form-control-solid" type="email" name="email"
@@ -53,6 +60,8 @@
                                 <div class="text-danger mt-2">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <!-- Password Field -->
                         <div class="fv-row mb-10">
                             <label class="form-label fs-6 fw-bolder text-dark">Password</label>
                             <input class="form-control form-control-lg form-control-solid" type="password"
@@ -61,16 +70,23 @@
                                 <div class="text-danger mt-2">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <!-- Confirm Password Field -->
                         <div class="fv-row mb-10">
                             <label class="form-label fs-6 fw-bolder text-dark">Confirm Password</label>
                             <input class="form-control form-control-lg form-control-solid" type="password"
                                 name="password_confirmation" required autocomplete="off" />
+                            @error('password_confirmation')
+                                <div class="text-danger mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
+
                         <div class="text-center">
                             <button type="submit" class="btn btn-lg btn-primary w-100 mb-5">
                                 <span class="indicator-label">Register</span>
                                 <span class="indicator-progress">Please wait...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
                             </button>
                         </div>
                     </form>
@@ -78,8 +94,21 @@
             </div>
         </div>
     </div>
+
     <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('success'))
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: "{{ session('success') }}",
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+    </script>
 </body>
 
 </html>

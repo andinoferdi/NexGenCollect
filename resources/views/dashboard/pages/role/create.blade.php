@@ -10,6 +10,9 @@
                 <div class="mb-3">
                     <label class="form-label">Role Name</label>
                     <input type="text" name="nama_role" class="form-control" required>
+                    @error('nama_role')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
                 <a href="{{ route('role.index') }}" class="btn btn-secondary">Cancel</a>

@@ -27,19 +27,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($settings as $roleMenuSettings)
-                                    @foreach($roleMenuSettings as $menuSettings)
+                                @foreach ($settings as $roleMenuSettings)
+                                    @foreach ($roleMenuSettings as $menuSettings)
                                         <tr>
                                             <td>{{ $menuSettings->first()->role->nama_role }}</td>
                                             <td>{{ $menuSettings->first()->menu->nama_menu }}</td>
                                             <td class="text-end">
-                                                <a href="{{ route('setting_menus.edit', $menuSettings->first()->role_id) }}" class="btn btn-icon btn-light btn-sm me-1 text-primary">
+                                                <a href="{{ route('setting_menus.edit', $menuSettings->first()->role_id) }}"
+                                                    class="btn btn-icon btn-light btn-sm me-1 text-primary">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
-                                                <form action="{{ route('setting_menus.destroy', $menuSettings->first()->id) }}" method="POST" style="display:inline;">
+                                                <form
+                                                    action="{{ route('setting_menus.destroy', $menuSettings->first()->id) }}"
+                                                    method="POST" style="display:inline;" class="delete-form">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-icon btn-light btn-sm text-danger">
+                                                    <button type="button"
+                                                        class="btn btn-icon btn-light btn-sm text-danger delete-button">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>

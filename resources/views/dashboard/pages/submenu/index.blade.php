@@ -28,19 +28,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($submenus as $submenu)
+                                @foreach ($submenus as $submenu)
                                     <tr>
                                         <td>{{ $submenu->nama_submenu }}</td>
                                         <td>{{ $submenu->link_submenu }}</td>
                                         <td>{{ $submenu->menu->nama_menu }}</td>
                                         <td class="text-end">
-                                            <a href="{{ route('submenu.edit', $submenu->id) }}" class="btn btn-icon btn-light btn-sm me-1 text-primary">
+                                            <a href="{{ route('submenu.edit', $submenu->id) }}"
+                                                class="btn btn-icon btn-light btn-sm me-1 text-primary">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <form action="{{ route('submenu.destroy', $submenu->id) }}" method="POST" style="display:inline;">
+                                            <form action="{{ route('submenu.destroy', $submenu->id) }}" method="POST"
+                                                style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-icon btn-light btn-sm text-danger">
+                                                <button type="button"
+                                                    class="btn btn-icon btn-light btn-sm text-danger delete-button">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>

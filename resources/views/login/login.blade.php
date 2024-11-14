@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body id="kt_body" class="bg-dark">
@@ -20,6 +21,7 @@
                     <img alt="Logo" src="{{ asset('assets/media/logos/logo-2.svg') }}" class="h-40px" />
                 </a>
                 <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+                    <!-- Display Error Messages -->
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -29,6 +31,7 @@
                             </ul>
                         </div>
                     @endif
+
                     <form method="POST" action="{{ route('login') }}" class="form w-100" novalidate="novalidate">
                         @csrf
                         <div class="text-center mb-10">
@@ -61,8 +64,23 @@
             </div>
         </div>
     </div>
+
     <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
+
+    <!-- SweetAlert for Success Message -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('success'))
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: "{{ session('success') }}",
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+    </script>
 </body>
 
 </html>

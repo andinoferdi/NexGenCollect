@@ -9,29 +9,33 @@
                 @csrf
                 @method('PUT')
 
-                <!-- Role Selection -->
                 <div class="mb-3">
                     <label class="form-label">Role</label>
                     <select name="role_id" class="form-select" required>
-                        @foreach($roles as $role)
-                            <option value="{{ $role->id }}" {{ $role->id == $id ? 'selected' : '' }}>{{ $role->nama_role }}</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->id }}" {{ $role->id == $id ? 'selected' : '' }}>
+                                {{ $role->nama_role }}</option>
                         @endforeach
                     </select>
+                    @error('role_id')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
-                <!-- Menu Selection -->
                 <div class="mb-3">
                     <label class="form-label">Menu</label>
                     <div>
-                        @foreach($menus as $menu)
+                        @foreach ($menus as $menu)
                             <div>
-                                <!-- Checkbox for menu -->
                                 <input type="checkbox" name="menu_id[]" value="{{ $menu->id }}"
                                     {{ isset($selectedSettings[$menu->id]) ? 'checked' : '' }}>
                                 <label>{{ $menu->nama_menu }}</label>
                             </div>
                         @endforeach
                     </div>
+                    @error('menu_id')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <button type="submit" class="btn btn-primary">Update</button>

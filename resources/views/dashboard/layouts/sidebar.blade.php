@@ -29,14 +29,16 @@
                 <div class="cursor-pointer symbol symbol-40px" data-kt-menu-trigger="click" data-kt-menu-overflow="true"
                     data-kt-menu-placement="top-start" data-bs-toggle="tooltip" data-bs-placement="right"
                     data-bs-dismiss="click" title="User profile">
-                    <img src="{{ asset('assets/media/avatars/150-26.jpg') }}" alt="image" />
+                    <img src="{{ Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('assets/media/avatars/blank.png') }}"
+                        alt="image" />
                 </div>
                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
                     data-kt-menu="true">
                     <div class="menu-item px-3">
                         <div class="menu-content d-flex align-items-center px-3">
                             <div class="symbol symbol-50px me-5">
-                                <img alt="Logo" src="{{ asset('assets/media/avatars/150-26.jpg') }}" />
+                                <img alt="Logo"
+                                    src="{{ Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('assets/media/avatars/blank.png') }}" />
                             </div>
                             <div class="d-flex flex-column">
                                 <div class="fw-bolder d-flex align-items-center fs-5">
@@ -55,7 +57,7 @@
 
                     <div class="separator my-2"></div>
                     <div class="menu-item px-5 my-1">
-                        <a href="#" class="menu-link px-5">Account Settings</a>
+                        <a href="{{ route('account_setting') }}" class="menu-link px-5">Account Settings</a>
                     </div>
                     <div class="menu-item px-5">
                         <a href="{{ route('logout') }}" class="menu-link px-5"
@@ -88,7 +90,8 @@
                                         </div>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link {{ request()->is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                                        <a class="menu-link {{ request()->is('dashboard') ? 'active' : '' }}"
+                                            href="{{ route('dashboard') }}">
                                             <span class="menu-icon">
                                                 <i class="fas fa-tachometer-alt"></i>
                                             </span>
@@ -96,7 +99,8 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link {{ request()->is('dashboard/userpage') ? 'active' : '' }}" href="{{ route('userpage') }}">
+                                        <a class="menu-link {{ request()->is('dashboard/userpage') ? 'active' : '' }}"
+                                            href="{{ route('userpage') }}">
                                             <span class="menu-icon">
                                                 <i class="fas fa-home"></i>
                                             </span>
@@ -105,44 +109,52 @@
                                     </div>
                                     @php
                                         $role_id = auth()->user()->role_id;
-                                        $menus = App\Models\Menu::whereHas('settingMenus', function ($query) use ($role_id) {
+                                        $menus = App\Models\Menu::whereHas('settingMenus', function ($query) use (
+                                            $role_id,
+                                        ) {
                                             $query->where('role_id', $role_id);
                                         })->get();
                                     @endphp
                                     @foreach ($menus as $menu)
-                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is('dashboard/*') ? 'menu-active' : '' }}">
-    <span class="menu-link {{ request()->is('dashboard/*') ? 'active' : '' }}">
-        <span class="menu-icon">
-            <i class="{{ $menu->icon_menu }}"></i>
-        </span>
-        <span class="menu-title">{{ $menu->nama_menu }}</span>
-        <span class="menu-arrow"></span>
-    </span>
-    @if ($menu->submenus->count() > 0)
-        <div class="menu-sub menu-sub-accordion {{ request()->is('dashboard/*') ? 'menu-active-bg' : '' }}">
-            @foreach ($menu->submenus as $submenu)
-                @php
-                    $hasAccess = App\Models\SettingSubmenu::where('role_id', $role_id)
-                        ->where('menu_id', $menu->id)
-                        ->where('submenu_id', $submenu->id)
-                        ->exists();
-                @endphp
-                @if ($hasAccess)
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('dashboard/' . $submenu->link_submenu) ? 'active' : '' }}"
-                            href="{{ url('dashboard/' . $submenu->link_submenu) }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">{{ $submenu->nama_submenu }}</span>
-                        </a>
-                    </div>
-                @endif
-            @endforeach
-        </div>
-    @endif
-</div>
-
+                                        <div data-kt-menu-trigger="click"
+                                            class="menu-item menu-accordion {{ request()->is('dashboard/*') ? 'menu-active' : '' }}">
+                                            <span
+                                                class="menu-link {{ request()->is('dashboard/*') ? 'active' : '' }}">
+                                                <span class="menu-icon">
+                                                    <i class="{{ $menu->icon_menu }}"></i>
+                                                </span>
+                                                <span class="menu-title">{{ $menu->nama_menu }}</span>
+                                                <span class="menu-arrow"></span>
+                                            </span>
+                                            @if ($menu->submenus->count() > 0)
+                                                <div
+                                                    class="menu-sub menu-sub-accordion {{ request()->is('dashboard/*') ? 'menu-active-bg' : '' }}">
+                                                    @foreach ($menu->submenus as $submenu)
+                                                        @php
+                                                            $hasAccess = App\Models\SettingSubmenu::where(
+                                                                'role_id',
+                                                                $role_id,
+                                                            )
+                                                                ->where('menu_id', $menu->id)
+                                                                ->where('submenu_id', $submenu->id)
+                                                                ->exists();
+                                                        @endphp
+                                                        @if ($hasAccess)
+                                                            <div class="menu-item">
+                                                                <a class="menu-link {{ request()->is('dashboard/' . $submenu->link_submenu) ? 'active' : '' }}"
+                                                                    href="{{ url('dashboard/' . $submenu->link_submenu) }}">
+                                                                    <span class="menu-bullet">
+                                                                        <span class="bullet bullet-dot"></span>
+                                                                    </span>
+                                                                    <span
+                                                                        class="menu-title">{{ $submenu->nama_submenu }}</span>
+                                                                </a>
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        </div>
                                     @endforeach
                                 </div>
                             </div>

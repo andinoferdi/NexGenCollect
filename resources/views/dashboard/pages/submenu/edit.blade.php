@@ -13,18 +13,28 @@
                     <select name="menu_id" class="form-control" required>
                         @foreach ($menus as $menu)
                             <option value="{{ $menu->id }}" {{ $menu->id == $submenu->menu_id ? 'selected' : '' }}>
-                                {{ $menu->nama_menu }}
-                            </option>
+                                {{ $menu->nama_menu }}</option>
                         @endforeach
                     </select>
+                    @error('menu_id')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Submenu Name</label>
-                    <input type="text" name="nama_submenu" class="form-control" value="{{ $submenu->nama_submenu }}" required>
+                    <input type="text" name="nama_submenu" class="form-control" value="{{ $submenu->nama_submenu }}"
+                        required>
+                    @error('nama_submenu')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Link</label>
-                    <input type="text" name="link_submenu" class="form-control" value="{{ $submenu->link_submenu }}" required>
+                    <input type="text" name="link_submenu" class="form-control" value="{{ $submenu->link_submenu }}"
+                        required>
+                    @error('link_submenu')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Icon (Optional)</label>

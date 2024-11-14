@@ -11,9 +11,8 @@
                     </h3>
                     <div class="card-toolbar">
                         <a href="{{ route('user.create') }}" class="btn btn-sm btn-light btn-active-primary">
-                         <i class="fas fa-plus text-primary"></i> New User
+                            <i class="fas fa-plus text-primary"></i> New User
                         </a>
-
                     </div>
                 </div>
 
@@ -22,6 +21,7 @@
                         <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
                             <thead>
                                 <tr class="fw-bolder text-muted">
+                                    <th class="min-w-100px">Photo</th>
                                     <th class="min-w-150px">Name</th>
                                     <th class="min-w-150px">Email</th>
                                     <th class="min-w-100px">Role</th>
@@ -29,19 +29,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($users as $user)
+                                @foreach ($users as $user)
                                     <tr>
+                                        <td>
+                                            <img src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('assets/media/avatars/blank.png') }}"
+                                                alt="User Photo" width="50">
+                                        </td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->role->nama_role ?? 'N/A' }}</td>
                                         <td class="text-end">
-                                            <a href="{{ route('user.edit', $user->id) }}" class="btn btn-icon btn-light btn-sm me-1 text-primary">
+                                            <a href="{{ route('user.edit', $user->id) }}"
+                                                class="btn btn-icon btn-light btn-sm me-1 text-primary">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <form action="{{ route('user.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                            <form action="{{ route('user.destroy', $user->id) }}" method="POST"
+                                                style="display:inline;" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-icon btn-light btn-sm text-danger">
+                                                <button type="button"
+                                                    class="btn btn-icon btn-light btn-sm text-danger delete-button">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
@@ -55,4 +62,30 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.delete-button');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const form = button.closest('.delete-form');
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 @endsection
