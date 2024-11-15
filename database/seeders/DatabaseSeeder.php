@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         SubmenusSeeder::class,
         SettingMenusSeeder::class,
         SettingSubmenusSeeder::class,
+        KategoriSeeder::class,
     ]);
 }
 

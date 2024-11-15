@@ -11,24 +11,21 @@ class SettingSubmenusSeeder extends Seeder
     {
         DB::table('setting_submenus')->truncate();
 
-        // Menambahkan data ke setting_submenus
         DB::table('setting_submenus')->insert([
 
-            // Admin (Role 1) bisa mengakses semua submenu
-            ['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 1],  // User
-            ['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 2],  // Role
-            ['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 3],  // Menu
-            ['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 4],  // Setting Menu
-            ['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 5],  // Sub Menu
-            ['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 6],  // Sub Menu
+            ['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 1],  
+            ['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 2],  
+            ['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 3],  
+            ['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 4],  
+            ['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 5],  
+            ['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 6],  
+            ['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 7],  
 
-            // Kolektor (Role 2) hanya bisa mengakses "User" dan "Role"
-            ['role_id' => 2, 'menu_id' => 1, 'submenu_id' => 1],  // User
-            ['role_id' => 2, 'menu_id' => 1, 'submenu_id' => 2],  // Role
+            ['role_id' => 2, 'menu_id' => 1, 'submenu_id' => 1],  
+            ['role_id' => 2, 'menu_id' => 1, 'submenu_id' => 2],  
 
-            // Seniman (Role 3) hanya bisa mengakses "Menu" dan "Setting Menu"
-            ['role_id' => 3, 'menu_id' => 1, 'submenu_id' => 3],  // Menu
-            ['role_id' => 3, 'menu_id' => 1, 'submenu_id' => 4],  // Setting Menu
+            ['role_id' => 3, 'menu_id' => 1, 'submenu_id' => 3],  
+            ['role_id' => 3, 'menu_id' => 1, 'submenu_id' => 4],  
         ]);
     }
 }

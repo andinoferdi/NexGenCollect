@@ -16,6 +16,7 @@ class SubmenusSeeder extends Seeder
             ['menu_id' => 1, 'nama_submenu' => 'Setting Menu', 'link_submenu' => 'setting_menus', 'created_at' => now(), 'updated_at' => now()],
             ['menu_id' => 1, 'nama_submenu' => 'Sub Menu', 'link_submenu' => 'submenu', 'created_at' => now(), 'updated_at' => now()],
             ['menu_id' => 1, 'nama_submenu' => 'Setting Sub Menu', 'link_submenu' => 'setting_submenus', 'created_at' => now(), 'updated_at' => now()],
+            ['menu_id' => 1, 'nama_submenu' => 'Kategori', 'link_submenu' => 'kategori', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 }
