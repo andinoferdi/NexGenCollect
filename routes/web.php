@@ -20,6 +20,8 @@ Route::post('/register', [LoginController::class, 'register']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/', [UserpageController::class, 'index'])->name('userpage');
+Route::get('/account/setting', [UserpageController::class, 'accountsettinguser'])->name('account_setting_user');
+    Route::put('/account/update/{user}', [UserpageController::class, 'updateprofileuser'])->name('updateprofile_user');
 
 Route::prefix('dashboard')->middleware('auth.custom')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
