@@ -10,6 +10,7 @@ use App\Http\Controllers\SubmenuController;
 use App\Http\Controllers\SettingMenuController;
 use App\Http\Controllers\SettingSubmenuController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ApplicationSettingController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,9 +20,11 @@ Route::get('/register', [LoginController::class, 'indexregister'])->name('regist
 Route::post('/register', [LoginController::class, 'register']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/', [UserpageController::class, 'index'])->name('userpage');
-Route::get('/account/setting', [UserpageController::class, 'accountsettinguser'])->name('account_setting_user');
+Route::prefix('')->group(function () {
+    Route::get('/', [UserpageController::class, 'index'])->name('userpage');
+    Route::get('/account/setting', [UserpageController::class, 'accountsettinguser'])->name('account_setting_user');
     Route::put('/account/update/{user}', [UserpageController::class, 'updateprofileuser'])->name('updateprofile_user');
+    });
 
 Route::prefix('dashboard')->middleware('auth.custom')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -32,6 +35,7 @@ Route::prefix('dashboard')->middleware('auth.custom')->group(function () {
     Route::resource('setting_menus', SettingMenuController::class);
     Route::resource('setting_submenus', SettingSubmenuController::class);
     Route::resource('kategori', KategoriController::class);
+    Route::get('/application_settings', [ApplicationSettingController::class, 'index'])->name('application_settings');
     Route::get('/account/setting', [DashboardController::class, 'accountsetting'])->name('account_setting');
     Route::put('/dashboard/account/update/{user}', [DashboardController::class, 'updateprofile'])->name('updateprofile');
 

@@ -22,19 +22,14 @@
 
 <body id="kt_body" class="bg-white position-relative">
     <div class="d-flex flex-column flex-root">
-        <!-- Main Wrapper -->
         <div class="mb-0" id="home">
-            <!-- Navbar -->
             <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg"
                 style="background-image: url({{ asset('assets/media/svg/illustrations/landing.svg') }})">
                 @include('userpage.layouts.navbar')
-                <!-- Content -->
                 @yield('content')
             </div>
         </div>
-        <!-- Footer -->
         @include('userpage.layouts.footer')
-        <!-- Scroll Top Button -->
         <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
             <span class="svg-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -48,7 +43,6 @@
             </span>
         </div>
     </div>
-    <!-- Scripts -->
     <script>
         var hostUrl = "{{ asset('assets/') }}";
     </script>
@@ -56,7 +50,6 @@
     <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- SweetAlert -->
     @if (session('success'))
         <script>
             Swal.fire({
@@ -68,7 +61,7 @@
         </script>
     @endif
 
-    <!-- Additional Scripts -->
+    @yield('script')
     <script src="{{ asset('assets/plugins/custom/fslightbox/fslightbox.bundle.js') }}"></script>
     <script src="{{ asset('assets/plugins/custom/typedjs/typedjs.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/custom/landing.js') }}"></script>

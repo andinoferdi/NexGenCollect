@@ -33,30 +33,35 @@
                     <div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-title-gray-500 menu-state-title-primary nav nav-flush fs-5 fw-bold"
                         id="kt_landing_menu">
                         <div class="menu-item">
-                            <a class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#kt_body"
-                                data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Home</a>
+                            <a class="menu-link nav-link {{ request()->is('/') ? 'active' : '' }} py-3 px-4 px-xxl-6"
+                                href="{{ route('userpage') }}" data-kt-scroll-toggle="true"
+                                data-kt-drawer-dismiss="true">Home</a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#how-it-works"
-                                data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">How it Works</a>
+                            <a class="menu-link nav-link {{ Request::is('how-it-works') ? 'active' : '' }} py-3 px-4 px-xxl-6"
+                                href="#how-it-works" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">How it
+                                Works</a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#achievements"
-                                data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Achievements</a>
+                            <a class="menu-link nav-link {{ Request::is('achievements') ? 'active' : '' }} py-3 px-4 px-xxl-6"
+                                href="#achievements" data-kt-scroll-toggle="true"
+                                data-kt-drawer-dismiss="true">Achievements</a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#team" data-kt-scroll-toggle="true"
-                                data-kt-drawer-dismiss="true">Team</a>
+                            <a class="menu-link nav-link {{ Request::is('team') ? 'active' : '' }} py-3 px-4 px-xxl-6"
+                                href="#team" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Team</a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#portfolio"
-                                data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Portfolio</a>
+                            <a class="menu-link nav-link {{ Request::is('portfolio') ? 'active' : '' }} py-3 px-4 px-xxl-6"
+                                href="#portfolio" data-kt-scroll-toggle="true"
+                                data-kt-drawer-dismiss="true">Portfolio</a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#pricing"
-                                data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Pricing</a>
+                            <a class="menu-link nav-link {{ Request::is('pricing') ? 'active' : '' }} py-3 px-4 px-xxl-6"
+                                href="#pricing" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Pricing</a>
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="flex-equal text-end ms-1">
@@ -71,8 +76,9 @@
                             data-kt-menu-overflow="true" data-kt-menu-placement="top-start" data-bs-toggle="tooltip"
                             data-bs-placement="right" data-bs-dismiss="click" title="User profile">
                             <img src="{{ Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('assets/media/avatars/blank.png') }}"
-                                alt="image" />
+                                alt="image" class="rounded-circle" />
                         </div>
+
                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
                             data-kt-menu="true">
                             <div class="menu-item px-3">
