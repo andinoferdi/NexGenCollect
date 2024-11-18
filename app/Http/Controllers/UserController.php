@@ -62,9 +62,9 @@ class UserController extends Controller
 
         if ($request->file('foto')) {
             if ($user->foto) {
-                Storage::disk('public')->delete($user->foto); // Menghapus foto lama jika ada
+                Storage::disk('public')->delete($user->foto);
             }
-            $data['foto'] = $request->file('foto')->store('user_photos', 'public'); // Menyimpan foto baru
+            $data['foto'] = $request->file('foto')->store('user_photos', 'public');
         }
 
         if ($request->password) {

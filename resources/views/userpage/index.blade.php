@@ -220,86 +220,34 @@
                      data-tns-nav="false" data-tns-items="1" data-tns-center="false" data-tns-dots="false"
                      data-tns-prev-button="#kt_team_slider_prev" data-tns-next-button="#kt_team_slider_next"
                      data-tns-responsive="{1200: {items: 3}, 992: {items: 2}}">
-                     <div class="text-center">
-                         <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
-                             style="background-image:url('{{ asset('assets/media/avatars/150-2.jpg') }}')"></div>
-                         <div class="mb-0">
-                             <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">Paul Miles</a>
-                             <div class="text-muted fs-6 fw-bold mt-1">Development Lead</div>
+
+                     @foreach ($teams as $team)
+                         <div class="text-center">
+                             <!-- Foto Tim -->
+                             <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
+                                 style="background-image:url('{{ $team->foto_tim ? asset('storage/' . $team->foto_tim) : asset('assets/media/avatars/blank.png') }}')">
+                             </div>
+                             <!-- Nama dan Posisi -->
+                             <div class="mb-0">
+                                 <a href="#"
+                                     class="text-dark fw-bolder text-hover-primary fs-3">{{ $team->nama_tim }}</a>
+                                 <div class="text-muted fs-6 fw-bold mt-1">{{ $team->deskripsi_tim }}</div>
+                             </div>
                          </div>
-                     </div>
-                     <div class="text-center">
-                         <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
-                             style="background-image:url('{{ asset('assets/media/avatars/150-3.jpg') }}')"></div>
-                         <div class="mb-0">
-                             <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">Melisa Marcus</a>
-                             <div class="text-muted fs-6 fw-bold mt-1">Creative Director</div>
-                         </div>
-                     </div>
-                     <div class="text-center">
-                         <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
-                             style="background-image:url('{{ asset('assets/media/avatars/150-4.jpg') }}')"></div>
-                         <div class="mb-0">
-                             <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">David Nilson</a>
-                             <div class="text-muted fs-6 fw-bold mt-1">Python Expert</div>
-                         </div>
-                     </div>
-                     <div class="text-center">
-                         <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
-                             style="background-image:url('{{ asset('assets/media/avatars/150-5.jpg') }}')"></div>
-                         <div class="mb-0">
-                             <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">Anne Clarc</a>
-                             <div class="text-muted fs-6 fw-bold mt-1">Project Manager</div>
-                         </div>
-                     </div>
-                     <div class="text-center">
-                         <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
-                             style="background-image:url('{{ asset('assets/media/avatars/150-6.jpg') }}')"></div>
-                         <div class="mb-0">
-                             <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">Ricky Hunt</a>
-                             <div class="text-muted fs-6 fw-bold mt-1">Art Director</div>
-                         </div>
-                     </div>
-                     <div class="text-center">
-                         <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
-                             style="background-image:url('{{ asset('assets/media/avatars/150-7.jpg') }}')"></div>
-                         <div class="mb-0">
-                             <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">Alice Wayde</a>
-                             <div class="text-muted fs-6 fw-bold mt-1">Marketing Manager</div>
-                         </div>
-                     </div>
-                     <div class="text-center">
-                         <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
-                             style="background-image:url('{{ asset('assets/media/avatars/150-8.jpg') }}')"></div>
-                         <div class="mb-0">
-                             <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">Carles Puyol</a>
-                             <div class="text-muted fs-6 fw-bold mt-1">QA Managers</div>
-                         </div>
-                     </div>
+                     @endforeach
+
                  </div>
+                 <!-- Navigasi -->
                  <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_prev">
-                     <span class="svg-icon svg-icon-3x">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                             fill="none">
-                             <path
-                                 d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z"
-                                 fill="black" />
-                         </svg>
-                     </span>
+                     <i class="fas fa-chevron-left fa-2x"></i>
                  </button>
                  <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_next">
-                     <span class="svg-icon svg-icon-3x">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                             fill="none">
-                             <path
-                                 d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z"
-                                 fill="black" />
-                         </svg>
-                     </span>
+                     <i class="fas fa-chevron-right fa-2x"></i>
                  </button>
              </div>
          </div>
      </div>
+
 
      <div class="mb-lg-n15 position-relative z-index-2">
          <div class="container">
@@ -854,7 +802,7 @@
          </div>
 
 
-         <div class="mt-20 mb-n20 position-relative z-index-2">
+         <div class="mt-20 mb-20 position-relative z-index-2">
              <div class="container">
                  <div class="text-center mb-17">
                      <h3 class="fs-2hx text-dark mb-5" id="clients" data-kt-scroll-offset="{default: 125, lg: 150}">
@@ -984,19 +932,6 @@
                              </div>
                          </div>
                      </div>
-                 </div>
-                 <div class="d-flex flex-stack flex-wrap flex-md-nowrap card-rounded shadow p-8 p-lg-12 mb-n5 mb-lg-n13"
-                     style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
-                     <div class="my-2 me-5">
-                         <div class="fs-1 fs-lg-2qx fw-bolder text-white mb-2">Start With Metronic Today,
-                             <span class="fw-normal">Speed Up Development!</span>
-                         </div>
-                         <div class="fs-6 fs-lg-5 text-white fw-bold opacity-75">Join over 100,000 Professionals
-                             Community to Stay Ahead</div>
-                     </div>
-                     <a href="https://1.envato.market/EA4JP"
-                         class="btn btn-lg btn-outline border-2 btn-outline-white flex-shrink-0 my-2">Purchase on
-                         Themeforest</a>
                  </div>
              </div>
          </div>

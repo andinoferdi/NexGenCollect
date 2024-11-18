@@ -24,7 +24,7 @@ Route::prefix('')->group(function () {
     Route::get('/', [UserpageController::class, 'index'])->name('userpage');
     Route::get('/account/setting', [UserpageController::class, 'accountsettinguser'])->name('account_setting_user');
     Route::put('/account/update/{user}', [UserpageController::class, 'updateprofileuser'])->name('updateprofile_user');
-    });
+});
 
 Route::prefix('dashboard')->middleware('auth.custom')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -36,10 +36,7 @@ Route::prefix('dashboard')->middleware('auth.custom')->group(function () {
     Route::resource('setting_submenus', SettingSubmenuController::class);
     Route::resource('kategori', KategoriController::class);
     Route::get('/application_settings', [ApplicationSettingController::class, 'index'])->name('application_settings');
+    Route::put('/application_settings/update_all', [ApplicationSettingController::class, 'updateAll'])->name('application_settings.update_all');
     Route::get('/account/setting', [DashboardController::class, 'accountsetting'])->name('account_setting');
     Route::put('/dashboard/account/update/{user}', [DashboardController::class, 'updateprofile'])->name('updateprofile');
-
-
-
 });
-

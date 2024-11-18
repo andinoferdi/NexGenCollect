@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\ApplicationSetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,7 +14,8 @@ class UserpageController extends Controller
 {
        public function index(Request $request)
 {
-    return view('userpage.index');
+   $teams = ApplicationSetting::all(); // Mengambil semua tim dari database
+    return view('userpage.index', compact('teams'));
 }
 
    public function accountSettinguser(Request $request)
