@@ -9,7 +9,7 @@
 
 ## Tentang NexGen Collect
 
-NexGen Collect adalah platform berbasis web yang dibangun dengan Laravel untuk mengelola, menampilkan, dan memperdagangkan aset digital dalam bentuk NFT (Non-Fungible Token). Platform ini dirancang untuk memberikan pengalaman inovatif bagi seniman, kolektor, dan investor dalam dunia aset digital, dengan memanfaatkan teknologi blockchain untuk memastikan keaslian dan keamanan setiap karya yang diperdagangkan.
+NexGen Collect adalah platform berbasis web yang dibangun dengan Laravel untuk mengelola, menampilkan, dan memperdagangkan aset digital dalam bentuk NFT (Non-Fungible Token). Platform ini dirancang untuk memberikan pengalaman inovatif bagi seniman, kolektor, dan investor dalam dunia aset digital. Dengan memanfaatkan teknologi blockchain untuk memastikan keaslian dan keamanan setiap karya yang diperdagangkan.
 
 Fitur-fitur utama NexGen Collect meliputi:
 - **Manajemen Koleksi NFT** – Seniman dapat mengunggah dan mengelola karya mereka sebagai NFT dalam berbagai format seperti gambar, audio, atau video.
