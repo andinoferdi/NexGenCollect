@@ -100,6 +100,17 @@
             });
         });
     </script>
+    <script>
+        Number.prototype.rupiah = function() {
+            var str = this.toString().replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            return str;
+        }
+
+        String.prototype.rupiah = function() {
+            var str = this.toString().replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            return str;
+        }
+    </script>
 </body>
 
 </html>

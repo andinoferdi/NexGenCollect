@@ -11,6 +11,7 @@ use App\Http\Controllers\SettingMenuController;
 use App\Http\Controllers\SettingSubmenuController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ApplicationSettingController;
+use App\Http\Controllers\NftController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -39,4 +40,8 @@ Route::prefix('dashboard')->middleware('auth.custom')->group(function () {
     Route::put('/application_settings/update_all', [ApplicationSettingController::class, 'updateAll'])->name('application_settings.update_all');
     Route::get('/account/setting', [DashboardController::class, 'accountsetting'])->name('account_setting');
     Route::put('/dashboard/account/update/{user}', [DashboardController::class, 'updateprofile'])->name('updateprofile');
+    Route::resource('nft', NftController::class);
+    Route::get('/nfts/{nft}/detail', [NftController::class, 'show'])->name('nft.detail');
+
+
 });

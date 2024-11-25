@@ -218,16 +218,11 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Ambil tab aktif dari localStorage atau gunakan default '#profile_tab'
             const activeTab = localStorage.getItem('activeTab') || '#profile_tab';
             const tabLink = document.querySelector(`[data-bs-target="${activeTab}"]`);
             const tabContent = document.querySelector(activeTab);
-
-            // Aktifkan tab terakhir yang tersimpan
             if (tabLink) tabLink.classList.add('active');
             if (tabContent) tabContent.classList.add('show', 'active');
-
-            // Simpan tab aktif ke localStorage saat diklik
             document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tab => {
                 tab.addEventListener('shown.bs.tab', function(e) {
                     localStorage.setItem('activeTab', e.target.getAttribute('data-bs-target'));

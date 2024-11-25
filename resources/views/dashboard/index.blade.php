@@ -3550,3 +3550,5 @@
         <!--end::Container-->
     </div>
 @endsection
+
+@section('script')

@@ -596,7 +596,8 @@
 						</div>
 						<!--end::Timeline items-->
 					</div>
-					<!--end::Content-->
+					<!--end::Cont
+						ent-->
 				</div>
 				<!--end::Body-->
 				<!--begin::Footer-->
