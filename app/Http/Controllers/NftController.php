@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NftRequest;
+use App\Http\Requests\NftRequestStore;
+use App\Http\Requests\NftRequestUpdate;
 use App\Models\Nft;
 use App\Models\Kategori;
 use App\Models\User;
@@ -23,18 +26,9 @@ class NftController extends Controller
         return view('dashboard.pages.nft.create', compact('kategoris', 'users'));
     }
 
-    public function store(Request $request)
+    public function store(NftRequestStore $request)
     {
-        $request->validate([
-            'nama_nft' => 'required|string|max:255',
-            'file' => 'required|file|mimes:jpg,jpeg,png,mp4,mp3,pdf|max:5120',
-            'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-            'deskripsi' => 'nullable|string',
-            'kategori_id' => 'required|exists:kategoris,id',
-            'user_id' => 'required|exists:users,id',
-            'harga_awal' => 'required|numeric|min:0',
-            'status' => 'required|in:available,sold,auction',
-        ]);
+        $request->validated();
 
         $filePath = $request->file('file')->store('nft_files', 'public');
         $fotoPath = $request->file('foto')->store('nft_photos', 'public');
@@ -60,18 +54,9 @@ class NftController extends Controller
         return view('dashboard.pages.nft.edit', compact('nft', 'kategoris', 'users'));
     }
 
-    public function update(Request $request, Nft $nft)
+    public function update(NftRequestUpdate $request, Nft $nft)
     {
-        $request->validate([
-            'nama_nft' => 'required|string|max:255',
-            'file' => 'nullable|file|mimes:jpg,jpeg,png,mp4,mp3,pdf|max:5120',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'deskripsi' => 'nullable|string',
-            'kategori_id' => 'required|exists:kategoris,id',
-            'user_id' => 'required|exists:users,id',
-            'harga_awal' => 'required|numeric|min:0',
-            'status' => 'required|in:available,sold,auction',
-        ]);
+        $request->validated();
 
         $data = $request->only(['nama_nft', 'deskripsi', 'kategori_id', 'user_id', 'harga_awal', 'status']);
 

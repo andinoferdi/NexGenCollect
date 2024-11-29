@@ -9,12 +9,18 @@
                 <div class="mb-3">
                     <label>Name</label>
                     <input type="text" name="nama_nft" class="form-control" value="{{ $nft->nama_nft }}" required>
+                    @error('nama_nft')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label>File</label>
                     <input type="file" name="file" class="form-control">
                     <small class="text-muted">Current File: <a href="{{ asset('storage/' . $nft->file) }}"
                             target="_blank">View</a></small>
+                    @error('file')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label>Photo</label>
@@ -22,10 +28,16 @@
                     <small class="text-muted">Current Photo:</small>
                     <img src="{{ asset('storage/' . $nft->foto) }}" alt="Current Photo" class="img-thumbnail mt-2"
                         width="150">
+                    @error('foto')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label>Description</label>
                     <textarea name="deskripsi" class="form-control">{{ $nft->deskripsi }}</textarea>
+                    @error('deskripsi')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label>Category</label>
@@ -36,6 +48,9 @@
                             </option>
                         @endforeach
                     </select>
+                    @error('kategori_id')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label>User</label>
@@ -46,6 +61,9 @@
                             </option>
                         @endforeach
                     </select>
+                    @error('user_id')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label>Starting Price</label>
@@ -55,6 +73,9 @@
                             value="{{ number_format($nft->harga_awal, 0, ',', '.') }}"
                             oninput="this.value = this.value.rupiah()" required>
                     </div>
+                    @error('harga_awal')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label>Status</label>
@@ -63,6 +84,9 @@
                         <option value="auction" {{ $nft->status == 'auction' ? 'selected' : '' }}>Auction</option>
                         <option value="sold" {{ $nft->status == 'sold' ? 'selected' : '' }}>Sold</option>
                     </select>
+                    @error('status')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
