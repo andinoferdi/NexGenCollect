@@ -8,22 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            if (in_array(Auth::id(), [1, 3])) {
+            if (in_array(Auth::user()->role_id, [1, 3])) {
                 return $next($request);
             } else {
                 return redirect()->route('userpage');
             }
         }
+
         return redirect()->route('login');
     }
 }

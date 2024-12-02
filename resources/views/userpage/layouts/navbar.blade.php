@@ -106,6 +106,10 @@
                                 <a href="{{ route('account_setting_user') }}" class="menu-link px-5">Account
                                     Settings</a>
                             </div>
+                            <div class="menu-item px-5 my-1">
+                                <a href="{{ route('verifikasi.indexuser') }}" class="menu-link px-5">Jadi
+                                    Seniman</a>
+                            </div>
                             <div class="menu-item px-5">
                                 <a href="{{ route('logout') }}" class="menu-link px-5"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
