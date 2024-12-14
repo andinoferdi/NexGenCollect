@@ -12,13 +12,16 @@
 
                     <div class="form-group mb-5">
                         <label class="form-label text-dark">KTP (File JPG, PNG, PDF max 2MB)</label>
-                        <input type="file" name="ktp_file" class="form-control form-control-solid" required>
+                        <input type="file" name="ktp_file" class="form-control form-control-solid" id="ktp_file"
+                            required accept=".jpg,.jpeg,.png,.pdf">
                     </div>
 
                     <div class="form-group mb-5">
                         <label class="form-label text-dark">Portfolio (File JPG, PNG, PDF, MP4 max 4MB)</label>
-                        <input type="file" name="portfolio_file" class="form-control form-control-solid" required>
+                        <input type="file" name="portfolio_file" class="form-control form-control-solid"
+                            id="portfolio_file" required accept=".jpg,.jpeg,.png,.pdf,.mp4">
                     </div>
+
 
                     <div class="form-group mb-5">
                         <label class="form-label text-dark">Deskripsi Diri</label>
@@ -79,4 +82,7 @@
         @endif
 
     </div>
+@endsection
+
+@section('script')
 @endsection

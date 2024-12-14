@@ -16,6 +16,7 @@
                         <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
                             <thead>
                                 <tr class="fw-bolder text-muted">
+                                    <th class="min-w-150px">Foto</th>
                                     <th class="min-w-150px">Name</th>
                                     <th class="min-w-150px">Email</th>
                                     <th class="min-w-150px">Verification Status</th>
@@ -25,6 +26,10 @@
                             <tbody>
                                 @foreach ($verifications as $verifikasi)
                                     <tr>
+                                        <td>
+                                            <img src="{{ $verifikasi->user->foto ? asset('storage/' . $verifikasi->user->foto) : asset('assets/media/avatars/blank.png') }}"
+                                                alt="User Photo" width="50">
+                                        </td>
                                         <td>{{ $verifikasi->user->name }}</td>
                                         <td>{{ $verifikasi->user->email }}</td>
                                         <td>{{ ucfirst($verifikasi->status_verifikasi) }}</td>

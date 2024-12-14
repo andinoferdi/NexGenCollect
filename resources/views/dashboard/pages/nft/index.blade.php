@@ -21,10 +21,10 @@
                         <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
                             <thead>
                                 <tr class="fw-bolder text-muted">
-                                    <th class="min-w-150px">Photo</th>
-                                    <th class="min-w-150px">NFT Name</th>
-                                    <th class="min-w-150px">Category</th>
-                                    <th class="min-w-100px">Starting Price</th>
+                                    <th class="min-w-150px">Foto</th>
+                                    <th class="min-w-150px">Nama NFT</th>
+                                    <th class="min-w-150px">Kategori</th>
+                                    <th class="min-w-100px">Harga Awal</th>
                                     <th class="min-w-100px">Status</th>
                                     <th class="min-w-100px text-end">Actions</th>
                                 </tr>

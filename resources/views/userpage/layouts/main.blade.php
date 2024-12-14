@@ -43,6 +43,7 @@
             </span>
         </div>
     </div>
+    @yield('script')
     <script>
         var hostUrl = "{{ asset('assets/') }}";
     </script>
@@ -61,7 +62,6 @@
         </script>
     @endif
 
-    @yield('script')
     <script src="{{ asset('assets/plugins/custom/fslightbox/fslightbox.bundle.js') }}"></script>
     <script src="{{ asset('assets/plugins/custom/typedjs/typedjs.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/custom/landing.js') }}"></script>

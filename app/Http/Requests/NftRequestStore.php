@@ -23,8 +23,8 @@ class NftRequestStore extends FormRequest
     {
         return [
             'nama_nft' => 'required|string|max:255',
-            'file' => 'required|file|mimes:jpg,jpeg,png,mp4,mp3,pdf|max:5120',
-            'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'file' => 'required|file|mimes:jpg,jpeg,png,mp4,mp3,pdf|max:512000',
+            'foto' => 'required|image|mimes:jpg,jpeg,png|max:22048',
             'deskripsi' => 'nullable|string',
             'kategori_id' => 'required|exists:kategoris,id',
             'user_id' => 'required|exists:users,id',

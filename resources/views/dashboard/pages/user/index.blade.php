@@ -21,7 +21,7 @@
                         <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
                             <thead>
                                 <tr class="fw-bolder text-muted">
-                                    <th class="min-w-100px">Photo</th>
+                                    <th class="min-w-100px">Foto</th>
                                     <th class="min-w-150px">Name</th>
                                     <th class="min-w-150px">Email</th>
                                     <th class="min-w-100px">Role</th>

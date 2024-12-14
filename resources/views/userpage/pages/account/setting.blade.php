@@ -18,10 +18,13 @@
                                 <input type="file" name="foto" accept=".png, .jpg, .jpeg" />
                                 <input type="hidden" name="avatar_remove" />
                             </label>
-                            <button type="button" class="btn btn-icon btn-circle btn-danger w-25px h-25px bg-body shadow"
-                                data-bs-toggle="tooltip" title="Delete avatar" onclick="deleteAvatar()">
-                                <i class="bi bi-trash fs-2"></i>
-                            </button>
+                            @if ($user->foto && $user->foto != 'avatars/blank.png')
+                                <button type="button"
+                                    class="btn btn-icon btn-circle btn-danger w-25px h-25px bg-body shadow"
+                                    data-bs-toggle="tooltip" title="Delete avatar" onclick="deleteAvatar()">
+                                    <i class="bi bi-trash fs-2"></i>
+                                </button>
+                            @endif
                         </div>
                         <h3 class="mt-3">{{ $user->name }}</h3>
                     </div>
