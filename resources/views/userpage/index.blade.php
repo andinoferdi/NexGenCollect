@@ -47,98 +47,52 @@
      </div>
      </div>
 
-
-
-     <div class="mb-n10 mb-lg-n20 z-index-2 mt-10">
-         <div class="container">
-             <div class="text-center mb-17">
-                 <h3 class="fs-2hx text-dark mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}">
-                     How it Works
-                 </h3>
-                 <div class="fs-5 text-muted fw-bold">
-                     Save thousands to millions of bucks by using single tool
-                     <br />for different amazing and great useful admin
-                 </div>
-             </div>
-             <div class="row w-100 gy-10 mb-md-20">
-                 <div class="col-md-4 px-5">
-                     <div class="text-center mb-10 mb-md-0">
-                         <img src="{{ asset('assets/media/illustrations/sigma-1/2.png') }}" class="mh-125px mb-9"
-                             alt="" />
-                         <div class="d-flex flex-center mb-5">
-                             <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">1</span>
-                             <div class="fs-5 fs-lg-3 fw-bolder text-dark">Jane Miller</div>
-                         </div>
-                         <div class="fw-bold fs-6 fs-lg-4 text-muted">
-                             Save thousands to millions of bucks
-                             <br />by using single tool for different
-                             <br />amazing and great
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-md-4 px-5">
-                     <div class="text-center mb-10 mb-md-0">
-                         <img src="{{ asset('assets/media/illustrations/sigma-1/8.png') }}" class="mh-125px mb-9"
-                             alt="" />
-                         <div class="d-flex flex-center mb-5">
-                             <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">2</span>
-                             <div class="fs-5 fs-lg-3 fw-bolder text-dark">Setup Your App</div>
-                         </div>
-                         <div class="fw-bold fs-6 fs-lg-4 text-muted">
-                             Save thousands to millions of bucks
-                             <br />by using single tool for different
-                             <br />amazing and great
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-md-4 px-5">
-                     <div class="text-center mb-10 mb-md-0">
-                         <img src="{{ asset('assets/media/illustrations/sigma-1/12.png') }}" class="mh-125px mb-9"
-                             alt="" />
-                         <div class="d-flex flex-center mb-5">
-                             <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">3</span>
-                             <div class="fs-5 fs-lg-3 fw-bolder text-dark">Enjoy Nautica App</div>
-                         </div>
-                         <div class="fw-bold fs-6 fs-lg-4 text-muted">
-                             Save thousands to millions of bucks
-                             <br />by using single tool for different
-                             <br />amazing and great
-                         </div>
-                     </div>
-                 </div>
-             </div>
-             <div class="tns tns-default">
-                 <div data-tns="true" data-tns-loop="true" data-tns-swipe-angle="false" data-tns-speed="2000"
-                     data-tns-autoplay="true" data-tns-autoplay-timeout="18000" data-tns-controls="true"
-                     data-tns-nav="false" data-tns-items="1" data-tns-center="false" data-tns-dots="false"
-                     data-tns-prev-button="#kt_team_slider_prev1" data-tns-next-button="#kt_team_slider_next1">
-                     <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
-                         <img src="{{ asset('assets/media/product-demos/demo1.png') }}"
-                             class="card-rounded shadow mw-100" alt="" />
-                     </div>
-                     <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
-                         <img src="{{ asset('assets/media/product-demos/demo2.png') }}"
-                             class="card-rounded shadow mw-100" alt="" />
-                     </div>
-                     <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
-                         <img src="{{ asset('assets/media/product-demos/demo4.png') }}"
-                             class="card-rounded shadow mw-100" alt="" />
-                     </div>
-                     <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
-                         <img src="{{ asset('assets/media/product-demos/demo5.png') }}"
-                             class="card-rounded shadow mw-100" alt="" />
-                     </div>
-                 </div>
-                 <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_prev1">
-                     <i class="fas fa-chevron-left fa-2x"></i>
-                 </button>
-                 <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_next1">
-                     <i class="fas fa-chevron-right fa-2x"></i>
-                 </button>
+     <div class="container my-5">
+         <div class="text-center mb-4">
+             <h3 class="fs-2hx text-dark mb-5">Our NFT Collection</h3>
+             <div class="btn-group" role="group" aria-label="NFT Categories">
+                 <button class="btn btn-dark filter-button" data-filter="all">All</button>
+                 @foreach ($kategoris as $kategori)
+                     <button class="btn btn-outline-dark filter-button" data-filter="{{ $kategori->id }}">
+                         {{ $kategori->nama_kategori }}
+                     </button>
+                 @endforeach
              </div>
          </div>
-     </div>
 
+         @if ($nfts->isEmpty())
+             <div class="text-center my-5">
+                 <h5 class="text-muted">Belum ada NFT</h5>
+             </div>
+         @else
+             <div class="row" id="nft-collection">
+                 @foreach ($nfts as $key => $nft)
+                     <div class="col-md-4 nft-item {{ $key > 2 ? 'd-none' : '' }}"
+                         data-category="{{ $nft->kategori_id }}">
+                         <div class="card shadow-sm mb-4">
+                             <img src="{{ asset('storage/' . $nft->foto) }}" class="card-img-top"
+                                 alt="{{ $nft->nama_nft }}">
+                             <div class="card-body">
+                                 <h5 class="card-title">{{ $nft->nama_nft }}</h5>
+                                 <p class="card-text text-muted">
+                                     {{ Str::limit($nft->deskripsi, 100) }}
+                                 </p>
+                                 <p class="card-text">
+                                     <span class="text-success">Price:
+                                         Rp{{ number_format($nft->harga_awal, 0, ',', '.') }}</span>
+                                 </p>
+                                 <a href="{{ route('nft.show', $nft->id) }}" class="btn btn-primary">View Details</a>
+                             </div>
+                         </div>
+                     </div>
+                 @endforeach
+             </div>
+
+             <div class="text-center mt-4">
+                 <button class="btn btn-outline-primary" id="view-more">View More</button>
+             </div>
+         @endif
+     </div>
 
 
      <div class="pb-15 pt-18 landing-dark-bg mt-10">
@@ -150,7 +104,6 @@
              </div>
              <div class="d-flex flex-center">
                  <div class="d-flex flex-wrap flex-center justify-content-lg-between mb-15 mx-auto w-xl-900px">
-                     <!-- Item 1 -->
                      <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain"
                          style="background-image: url('{{ asset('assets/media/svg/misc/octagon.svg') }}')">
                          <span class="fa-stack fa-2x mb-3">
@@ -166,7 +119,6 @@
                          </div>
                      </div>
 
-                     <!-- Item 2 -->
                      <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain"
                          style="background-image: url('{{ asset('assets/media/svg/misc/octagon.svg') }}')">
                          <span class="fa-stack fa-2x mb-3">
@@ -182,7 +134,6 @@
                          </div>
                      </div>
 
-                     <!-- Item 3 -->
                      <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain"
                          style="background-image: url('{{ asset('assets/media/svg/misc/octagon.svg') }}')">
                          <span class="fa-stack fa-2x mb-3">
@@ -223,11 +174,9 @@
 
                      @foreach ($teams as $team)
                          <div class="text-center">
-                             <!-- Foto Tim -->
                              <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
                                  style="background-image:url('{{ $team->foto_tim ? asset('storage/' . $team->foto_tim) : asset('assets/media/avatars/blank.png') }}')">
                              </div>
-                             <!-- Nama dan Posisi -->
                              <div class="mb-0">
                                  <a href="#"
                                      class="text-dark fw-bolder text-hover-primary fs-3">{{ $team->nama_tim }}</a>
@@ -237,7 +186,6 @@
                      @endforeach
 
                  </div>
-                 <!-- Navigasi -->
                  <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_prev">
                      <i class="fas fa-chevron-left fa-2x"></i>
                  </button>
@@ -935,4 +883,59 @@
                  </div>
              </div>
          </div>
+     @endsection
+     @section('script')
+         <script>
+             document.addEventListener("DOMContentLoaded", function() {
+                 const buttons = document.querySelectorAll(".filter-button");
+                 const items = document.querySelectorAll(".nft-item");
+                 const viewMoreButton = document.getElementById("view-more");
+
+                 let displayedCount = 3;
+
+                 buttons.forEach((button) => {
+                     button.addEventListener("click", function() {
+                         const filter = this.getAttribute("data-filter");
+
+                         buttons.forEach((btn) => btn.classList.remove("btn-dark"));
+                         this.classList.add("btn-dark");
+
+                         items.forEach((item) => {
+                             item.classList.add("fade-out");
+                             setTimeout(() => {
+                                 if (filter === "all" || item.getAttribute(
+                                         "data-category") === filter) {
+                                     item.style.display = "block";
+                                     item.classList.remove("d-none");
+                                     setTimeout(() => item.classList.remove("fade-out"),
+                                         200);
+                                 } else {
+                                     item.style.display = "none";
+                                     item.classList.add("d-none");
+                                 }
+                             }, 200);
+                         });
+
+                         displayedCount = 3;
+                         viewMoreButton.style.display = "inline-block";
+                     });
+                 });
+
+                 viewMoreButton.addEventListener("click", function() {
+                     let hiddenItems = Array.from(items).filter((item) => {
+                         return item.style.display === "block" && item.classList.contains("d-none");
+                     });
+
+                     for (let i = 0; i < 3; i++) {
+                         if (hiddenItems[i]) {
+                             hiddenItems[i].classList.remove("d-none");
+                         }
+                     }
+
+                     if (hiddenItems.length <= 3) {
+                         viewMoreButton.style.display = "none";
+                     }
+                 });
+             });
+         </script>
      @endsection

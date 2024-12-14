@@ -7,11 +7,12 @@
 
             <form action="{{ route('nft.update', $nft->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT') <!-- Untuk metode HTTP PUT -->
+                @method('PUT')
 
                 <div class="mb-3">
-                    <label>Name</label>
-                    <input type="text" name="nama_nft" class="form-control @error('nama_nft') is-invalid @enderror"
+                    <label>Nama NFT</label>
+                    <input type="text" autocomplete="off" name="nama_nft"
+                        class="form-control @error('nama_nft') is-invalid @enderror"
                         value="{{ old('nama_nft', $nft->nama_nft) }}" required>
                     @error('nama_nft')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -56,15 +57,15 @@
                 </div>
 
                 <div class="mb-3">
-                    <label>Description</label>
-                    <textarea name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror">{{ old('deskripsi', $nft->deskripsi) }}</textarea>
+                    <label>Deskripsi</label>
+                    <textarea name="deskripsi" autocomplete="off" class="form-control @error('deskripsi') is-invalid @enderror">{{ old('deskripsi', $nft->deskripsi) }}</textarea>
                     @error('deskripsi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label>Category</label>
+                    <label>Kategori</label>
                     <select name="kategori_id" class="form-control @error('kategori_id') is-invalid @enderror" required>
                         @foreach ($kategoris as $kategori)
                             <option value="{{ $kategori->id }}"
@@ -100,7 +101,7 @@
                     <label>Harga Awal</label>
                     <div class="input-group">
                         <span class="input-group-text">Rp</span>
-                        <input type="text" name="harga_awal" id="harga_awal"
+                        <input type="text" autocomplete="off" name="harga_awal" id="harga_awal"
                             class="form-control @error('harga_awal') is-invalid @enderror"
                             value="{{ old('harga_awal', $nft->harga_awal) }}" oninput="this.value = this.value.rupiah()"
                             required>

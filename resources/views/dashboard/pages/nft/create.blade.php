@@ -6,9 +6,9 @@
             <form action="{{ route('nft.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
-                    <label>Name</label>
-                    <input type="text" name="nama_nft" class="form-control @error('nama_nft') is-invalid @enderror"
-                        required>
+                    <label>Nama NFT</label>
+                    <input type="text" name="nama_nft" autocomplete="off"
+                        class="form-control @error('nama_nft') is-invalid @enderror" required>
                     @error('nama_nft')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -51,7 +51,7 @@
 
                 <div class="mb-3">
                     <label>Description</label>
-                    <textarea name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror"></textarea>
+                    <textarea name="deskripsi" autocomplete="off" class="form-control @error('deskripsi') is-invalid @enderror"></textarea>
                     @error('deskripsi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -91,7 +91,7 @@
                     <label>Harga Awal</label>
                     <div class="input-group">
                         <span class="input-group-text">Rp</span>
-                        <input type="text" name="harga_awal" id="harga_awal"
+                        <input type="text" autocomplete="off" name="harga_awal" id="harga_awal"
                             class="form-control @error('harga_awal') is-invalid @enderror"
                             oninput="this.value = this.value.rupiah()" required>
                         @error('harga_awal')

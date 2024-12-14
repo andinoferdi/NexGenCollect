@@ -38,7 +38,6 @@ class NftController extends Controller
     $fotoName = $foto->getClientOriginalName();
     $fotoPath = $foto->storeAs('nft_photos', $fotoName, 'public'); 
 
-    // Menyimpan data NFT ke database
     Nft::create([
         'nama_nft' => $request->nama_nft,
         'file' => $filePath,

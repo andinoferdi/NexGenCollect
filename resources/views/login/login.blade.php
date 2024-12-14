@@ -5,7 +5,7 @@
     <title>Login</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favico.png') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
@@ -14,14 +14,12 @@
 
 <body id="kt_body" class="bg-dark">
     <div class="d-flex flex-column flex-root">
-        <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed"
-            style="background-image: url('{{ asset('assets/media/illustrations/sigma-1/14-dark.png') }}')">
+        <div class="d-flex flex-column flex-column-fluid" style="background-color: white;">
             <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
                 <a href="/" class="mb-12">
-                    <img alt="Logo" src="{{ asset('assets/media/logos/logo-2.svg') }}" class="h-40px" />
+                    <img alt="Logo" src="{{ asset('assets/media/logos/favico.png') }}" class="h-40px" />
                 </a>
                 <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
-                    <!-- Display Error Messages -->
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -68,7 +66,6 @@
     <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
 
-    <!-- SweetAlert for Success Message -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             @if (session('success'))

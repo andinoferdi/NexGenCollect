@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Nft;
+use App\Models\Kategori;
 use App\Models\ApplicationSetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +17,10 @@ class UserpageController extends Controller
     public function index(Request $request)
     {
         $teams = ApplicationSetting::all();
-        return view('userpage.index', compact('teams'));
+        $kategoris = Kategori::all();
+        $nfts = Nft::with('kategori')->get();
+        
+        return view('userpage.index', compact('teams', 'nfts', 'kategoris'));
     }
 
     public function accountSettinguser(Request $request)

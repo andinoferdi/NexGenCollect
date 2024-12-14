@@ -5,7 +5,7 @@
     <title>Register</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favico.png') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
@@ -14,14 +14,12 @@
 
 <body id="kt_body" class="bg-dark">
     <div class="d-flex flex-column flex-root">
-        <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed"
-            style="background-image: url('{{ asset('assets/media/illustrations/sigma-1/14-dark.png') }}')">
+        <div class="d-flex flex-column flex-column-fluid" style="background-color: white;">
             <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
                 <a href="/" class="mb-12">
-                    <img alt="Logo" src="{{ asset('assets/media/logos/logo-2.svg') }}" class="h-40px" />
+                    <img alt="Logo" src="{{ asset('assets/media/logos/favico.png') }}" class="h-40px" />
                 </a>
                 <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
-                    <!-- Display All Errors -->
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul class="mb-0">
@@ -41,7 +39,6 @@
                             </div>
                         </div>
 
-                        <!-- Name Field -->
                         <div class="fv-row mb-10">
                             <label class="form-label fs-6 fw-bolder text-dark">Name</label>
                             <input class="form-control form-control-lg form-control-solid" type="text" name="name"
@@ -51,7 +48,6 @@
                             @enderror
                         </div>
 
-                        <!-- Email Field -->
                         <div class="fv-row mb-10">
                             <label class="form-label fs-6 fw-bolder text-dark">Email</label>
                             <input class="form-control form-control-lg form-control-solid" type="email" name="email"
@@ -61,7 +57,6 @@
                             @enderror
                         </div>
 
-                        <!-- Password Field -->
                         <div class="fv-row mb-10">
                             <label class="form-label fs-6 fw-bolder text-dark">Password</label>
                             <input class="form-control form-control-lg form-control-solid" type="password"
@@ -71,7 +66,6 @@
                             @enderror
                         </div>
 
-                        <!-- Confirm Password Field -->
                         <div class="fv-row mb-10">
                             <label class="form-label fs-6 fw-bolder text-dark">Confirm Password</label>
                             <input class="form-control form-control-lg form-control-solid" type="password"
