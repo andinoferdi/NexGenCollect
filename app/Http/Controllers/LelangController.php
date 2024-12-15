@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Keranjang;
 use App\Models\Lelang;
 use App\Models\Nft;
+use App\Models\PenawaranLelang;
 use Illuminate\Http\Request;
 
 class LelangController extends Controller
@@ -82,8 +84,15 @@ class LelangController extends Controller
         if (now() < $lelang->tanggal_awal) {
             return redirect()->route('lelang.index')->with('error', 'Auction cannot be stopped before it starts.');
         }
+
+        $highestBid = PenawaranLelang::where('lelang_id', $lelang->id)->max('harga');
     
-        $lelang->update(['status' => 'closed']);
+        $lelang->update(['status' => 'closed', 'harga_akhir' => $highestBid]);
+
+        Keranjang::create([
+            'user_id' => $lelang->pemenang->user_id,
+            'nft_id' => $lelang->pemenang->nft_id,
+        ]);
         return redirect()->route('lelang.index')->with('success', 'Auction has been stopped successfully.');
     }
     

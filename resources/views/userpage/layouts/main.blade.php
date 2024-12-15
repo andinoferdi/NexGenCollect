@@ -65,6 +65,17 @@
     <script src="{{ asset('assets/plugins/custom/typedjs/typedjs.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/custom/landing.js') }}"></script>
     <script src="{{ asset('assets/js/custom/pages/company/pricing.js') }}"></script>
+    <script>
+        Number.prototype.rupiah = function() {
+            var str = this.toString().replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            return str;
+        }
+
+        String.prototype.rupiah = function() {
+            var str = this.toString().replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            return str;
+        }
+    </script>
 </body>
 @yield('script')
 

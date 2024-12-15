@@ -103,8 +103,8 @@
                         <span class="input-group-text">Rp</span>
                         <input type="text" autocomplete="off" name="harga_awal" id="harga_awal"
                             class="form-control @error('harga_awal') is-invalid @enderror"
-                            value="{{ old('harga_awal', $nft->harga_awal) }}" oninput="this.value = this.value.rupiah()"
-                            required>
+                            value=" {{ number_format($nft->harga_awal, 0, ',', '.') }}"
+                            oninput="this.value = this.value.rupiah()" required>
                         @error('harga_awal')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

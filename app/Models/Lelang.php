@@ -17,6 +17,7 @@ class Lelang extends Model
         'tanggal_akhir',
         'status',
     ];
+    protected $appends = ['pemenang'];
 
   
     public function nft()
@@ -34,5 +35,9 @@ class Lelang extends Model
     {
         return $this->hasOne(PenawaranLelang::class, 'lelang_id')
             ->orderBy('harga', 'desc');
+    }
+
+    public function getPemenangAttribute() {
+        return PenawaranLelang::orderBy('created_at', 'ASC')->orderBy('harga', 'DESC')->first();
     }
 }

@@ -25,6 +25,7 @@
                                     <th class="min-w-150px">Start Date</th>
                                     <th class="min-w-150px">End Date</th>
                                     <th class="min-w-100px">Status</th>
+                                    <th class="min-w-100px">Pemenang</th>
                                     <th class="min-w-100px text-end">Actions</th>
                                 </tr>
                             </thead>
@@ -35,6 +36,9 @@
                                         <td>{{ $lelang->tanggal_awal }}</td>
                                         <td>{{ $lelang->tanggal_akhir }}</td>
                                         <td>{{ ucfirst($lelang->status) }}</td>
+                                        <td>
+                                            {{ $lelang->status === 'closed' ? $lelang->pemenang->user->name : '-' }}
+                                        </td>
                                         <td class="text-end">
                                             @if ($lelang->status === 'closed')
                                                 <span class="text-muted">No Actions Available</span>
@@ -44,7 +48,7 @@
                                                     @csrf
                                                     @method('PUT')
                                                     <button type="button" class="btn btn-danger btn-sm stop-button">
-                                                        Stop
+                                                        Stop & Set Pemenang
                                                     </button>
                                                 </form>
                                             @else

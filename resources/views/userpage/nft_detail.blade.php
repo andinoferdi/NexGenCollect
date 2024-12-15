@@ -29,14 +29,11 @@
                         $fileExtension = pathinfo($nft->file, PATHINFO_EXTENSION);
                     @endphp
 
-                    {{-- Gambar --}}
                     @if (in_array($fileExtension, ['jpg', 'jpeg', 'png']))
                         <div style="pointer-events: none;">
                             <img src="{{ asset('storage/' . $nft->file) }}" class="img-fluid rounded shadow-sm mt-3"
                                 alt="NFT Image" style="max-width: 100%; height: auto;" oncontextmenu="return false;">
                         </div>
-
-                        {{-- Audio --}}
                     @elseif (in_array($fileExtension, ['mp3']))
                         <div>
                             <audio id="audioPlayer" controls class="w-100 mt-3" controlsList="nodownload"
@@ -45,8 +42,6 @@
                                 Your browser does not support the audio element.
                             </audio>
                         </div>
-
-                        {{-- Video --}}
                     @elseif (in_array($fileExtension, ['mp4']))
                         <div>
                             <video id="videoPlayer" controls class="w-100 rounded shadow-sm mt-3" controlsList="nodownload"
@@ -60,15 +55,21 @@
                     @endif
                 </div>
 
-                {{-- Countdown Section --}}
                 <div class="form-group mb-5">
                     <label class="form-label text-dark fw-bold">Lelang Status</label>
                     @if ($lelang)
                         <div id="countdown" class="text-center text-muted mb-3"></div>
-                        <div id="lelang-button" class="d-none">
-                            <a href="{{ route('penawaran.index', $lelang->id) }}" class="btn btn-success w-50">Mulai
-                                Lelang</a>
-                        </div>
+                        @if ($lelang->status === 'closed')
+                            <div class="text-center mb-3">
+                                <h5 class="text-danger fw-bold">Pemenang Lelang:
+                                    {{ $lelang->pemenang ? $lelang->pemenang->user->name : '-' }}</h5>
+                            </div>
+                        @else
+                            <div id="lelang-button" class="d-none">
+                                <a href="{{ route('penawaran.index', $lelang->id) }}" class="btn btn-success w-50">Buat
+                                    Penawaran</a>
+                            </div>
+                        @endif
                     @else
                         <p class="text-muted">NFT ini tidak sedang dilelang.</p>
                     @endif
@@ -85,7 +86,7 @@
 @section('script')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            @if ($lelang)
+            @if ($lelang && $lelang->status !== 'closed')
                 const startDate = new Date("{{ $lelang->tanggal_awal }}").getTime();
                 const endDate = new Date("{{ $lelang->tanggal_akhir }}").getTime();
                 const countdownElement = document.getElementById('countdown');
@@ -106,7 +107,6 @@
                     } else {
                         countdownElement.innerHTML = "Lelang telah selesai.";
                         countdownElement.classList.add('text-danger');
-                        lelangButton.classList.remove('d-none');
                         clearInterval(countdownInterval);
                         return;
                     }

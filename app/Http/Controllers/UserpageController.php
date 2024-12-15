@@ -35,7 +35,7 @@ class UserpageController extends Controller
     public function nftDetail($id)
     {
         $nft = Nft::with('kategori')->findOrFail($id);
-        $lelang = $nft->lelang()->where('status', 'open')->first();
+        $lelang = $nft->lelang()->first();
         return view('userpage.nft_detail', compact('nft', 'lelang'));
     }
     public function accountSettinguser(Request $request)

@@ -36,8 +36,10 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="harga" class="form-label fw-bold">Masukkan Harga Penawaran</label>
-                                <input type="number" name="harga" id="harga" class="form-control"
-                                    placeholder="Masukkan harga..." required min="{{ $highestBid }}">
+                                <input type="text" name="harga" id="harga" class="form-control"
+                                    placeholder="Masukkan harga..." oninput="this.value = this.value.rupiah()"
+                                    value=" {{ number_format($highestBid, 0, ',', '.') }}" required
+                                    min="{{ $highestBid }}">
                                 <small class="text-muted">Minimal harga penawaran: Rp
                                     {{ number_format($highestBid, 0, ',', '.') }}</small>
                             </div>
