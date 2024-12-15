@@ -46661,11 +46661,11 @@ label.rating-label:hover ~ .rating-label > .svg-icon svg:hover [fill]:not(.perma
 }
 
 .landing-dark-bg {
-  background-color: #13263C;
+  background-color: #000000;
 }
 
 .landing-dark-color {
-  color: #13263C;
+  color: #000000;
 }
 
 .landing-dark-border {

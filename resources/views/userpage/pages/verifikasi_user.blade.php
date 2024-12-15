@@ -2,43 +2,48 @@
 
 @section('content')
     <div class="container mt-5">
-        <div class="card card-custom shadow-lg" style="border-radius: 15px;">
-            <div class="card-body p-10">
-                <form action="{{ route('verifikasi.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="text-center mb-5">
-                        <h3 class="mt-3">Verifikasi Akun Anda</h3>
-                    </div>
-
-                    <div class="form-group mb-5">
-                        <label class="form-label text-dark">KTP (File JPG, PNG, PDF max 2MB)</label>
-                        <input type="file" name="ktp_file" class="form-control form-control-solid" id="ktp_file"
-                            required accept=".jpg,.jpeg,.png,.pdf">
-                    </div>
-
-                    <div class="form-group mb-5">
-                        <label class="form-label text-dark">Portfolio (File JPG, PNG, PDF, MP4 max 4MB)</label>
-                        <input type="file" name="portfolio_file" class="form-control form-control-solid"
-                            id="portfolio_file" required accept=".jpg,.jpeg,.png,.pdf,.mp4">
-                    </div>
-
-
-                    <div class="form-group mb-5">
-                        <label class="form-label text-dark">Deskripsi Diri</label>
-                        <textarea name="deskripsi" class="form-control form-control-solid" rows="5" required>{{ old('deskripsi') }}</textarea>
-                    </div>
-
-                    <div class="form-group mb-5">
-                        <label class="form-label text-dark">Informasi Akun Sosial Media</label>
-                        <textarea name="sosial_media_info" class="form-control form-control-solid" rows="3" required>{{ old('sosial_media_info') }}</textarea>
-                    </div>
-
-                    <div class="d-flex justify-content-center mt-5">
-                        <button type="submit" class="btn btn-primary w-50">Kirim Verifikasi</button>
-                    </div>
-                </form>
+        @if ($verifikasi && $verifikasi->status_verifikasi === 'rejected')
+            <div class="alert alert-danger">
+                Verifikasi akun Anda telah <strong>ditolak</strong>. Silakan hubungi admin untuk informasi lebih lanjut.
             </div>
-        </div>
+        @else
+            <div class="card card-custom shadow-lg" style="border-radius: 15px;">
+                <div class="card-body p-10">
+                    <form action="{{ route('userpage.verifikasi.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="text-center mb-5">
+                            <h3 class="mt-3">Verifikasi Akun Anda</h3>
+                        </div>
+
+                        <div class="form-group mb-5">
+                            <label class="form-label text-dark">KTP (File JPG, PNG, PDF max 2MB)</label>
+                            <input type="file" name="ktp_file" class="form-control form-control-solid" id="ktp_file"
+                                required accept=".jpg,.jpeg,.png,.pdf">
+                        </div>
+
+                        <div class="form-group mb-5">
+                            <label class="form-label text-dark">Portfolio (File JPG, PNG, PDF, MP4 max 4MB)</label>
+                            <input type="file" name="portfolio_file" class="form-control form-control-solid"
+                                id="portfolio_file" required accept=".jpg,.jpeg,.png,.pdf,.mp4">
+                        </div>
+
+                        <div class="form-group mb-5">
+                            <label class="form-label text-dark">Deskripsi Diri</label>
+                            <textarea name="deskripsi" class="form-control form-control-solid" rows="5" required>{{ old('deskripsi') }}</textarea>
+                        </div>
+
+                        <div class="form-group mb-5">
+                            <label class="form-label text-dark">Informasi Akun Sosial Media</label>
+                            <textarea name="sosial_media_info" class="form-control form-control-solid" rows="3" required>{{ old('sosial_media_info') }}</textarea>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-5">
+                            <button type="submit" class="btn btn-primary w-50">Kirim Verifikasi</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @endif
 
         @if ($verifikasi)
             <div class="card card-custom shadow-lg mt-5" style="border-radius: 15px;">
@@ -80,7 +85,6 @@
                 Anda belum mengajukan permohonan verifikasi. Silakan isi form di atas untuk mengajukan verifikasi.
             </div>
         @endif
-
     </div>
 @endsection
 

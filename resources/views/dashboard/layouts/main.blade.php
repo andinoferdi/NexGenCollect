@@ -62,7 +62,6 @@
     </div>
 
 
-    @yield('script')
     <script>
         var hostUrl = "{{ asset('assets/') }}";
     </script>
@@ -111,6 +110,8 @@
             return str;
         }
     </script>
+    @yield('script')
+
 </body>
 
 </html>

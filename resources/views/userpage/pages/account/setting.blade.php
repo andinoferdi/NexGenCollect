@@ -2,9 +2,10 @@
 
 @section('content')
     <div class="container mt-5">
-        <div class="card card-custom shadow-lg" style="border-radius: 15px;">
+        <div class="card card-custom shadow-lg" style="border-radius: 15px; max-width: 600px; margin: 0 auto;">
             <div class="card-body p-10">
-                <form action="{{ route('updateprofile_user', $user->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('userpage.updateprofile_user', $user->id) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="text-center mb-5">

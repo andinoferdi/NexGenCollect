@@ -1,5 +1,5 @@
 <div class="mb-0">
-    <div class="landing-dark-bg pt-20">
+    <div class="landing-dark-bg pt-20" style="background-color: #1a1b1a;">
         <div class="container">
             <div class="row py-10 py-lg-20">
                 <div class="col-lg-6 pe-lg-16 mb-10 mb-lg-0">

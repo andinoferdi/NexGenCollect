@@ -12,6 +12,5 @@ class KategoriSeeder extends Seeder
         Kategori::create(['nama_kategori' => 'Gambar']);
         Kategori::create(['nama_kategori' => 'Audio']);
         Kategori::create(['nama_kategori' => 'Video']);
-        Kategori::create(['nama_kategori' => 'Dokumen']);
     }
 }

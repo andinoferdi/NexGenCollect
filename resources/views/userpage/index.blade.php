@@ -49,9 +49,9 @@
 
      <div class="container my-5">
          <div class="text-center mb-4">
-             <h3 class="fs-2hx text-dark mb-5">Our NFT Collection</h3>
+             <h3 class="fs-2hx text-dark mb-5">Koleksi NFT Kami</h3>
              <div class="btn-group" role="group" aria-label="NFT Categories">
-                 <button class="btn btn-dark filter-button" data-filter="all">All</button>
+                 <button class="btn btn-dark filter-button" data-filter="all">Semua</button>
                  @foreach ($kategoris as $kategori)
                      <button class="btn btn-outline-dark filter-button" data-filter="{{ $kategori->id }}">
                          {{ $kategori->nama_kategori }}
@@ -78,10 +78,11 @@
                                      {{ Str::limit($nft->deskripsi, 100) }}
                                  </p>
                                  <p class="card-text">
-                                     <span class="text-success">Price:
+                                     <span class="text-success">Harga Awal:
                                          Rp{{ number_format($nft->harga_awal, 0, ',', '.') }}</span>
                                  </p>
-                                 <a href="{{ route('nft.show', $nft->id) }}" class="btn btn-primary">View Details</a>
+                                 <a href="{{ route('userpage.nft.detail', $nft->id) }}" class="btn btn-primary">Lihat
+                                     Detail</a>
                              </div>
                          </div>
                      </div>
@@ -89,69 +90,72 @@
              </div>
 
              <div class="text-center mt-4">
-                 <button class="btn btn-outline-primary" id="view-more">View More</button>
+                 <a href="{{ route('userpage.nft') }}" class="btn btn-outline-primary" id="view-more">Lihat Semua</a>
              </div>
          @endif
      </div>
 
 
+
      <div class="pb-15 pt-18 landing-dark-bg mt-10">
          <div class="container">
              <div class="text-center mt-15 mb-18" id="achievements" data-kt-scroll-offset="{default: 100, lg: 150}">
-                 <h3 class="fs-2hx text-white fw-bolder mb-5">We Make Things Better</h3>
-                 <div class="fs-5 text-gray-700 fw-bold">Save thousands to millions of bucks by using single tool for
-                     different amazing and great useful admin</div>
+                 <h3 class="fs-2hx text-white fw-bolder mb-5">User Terpercaya Kami</h3>
+                 <div class="fs-5 text-gray-700 fw-bold">Discover unique collections from our creators.</div>
              </div>
-             <div class="d-flex flex-center">
-                 <div class="d-flex flex-wrap flex-center justify-content-lg-between mb-15 mx-auto w-xl-900px">
-                     <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain"
-                         style="background-image: url('{{ asset('assets/media/svg/misc/octagon.svg') }}')">
-                         <span class="fa-stack fa-2x mb-3">
-                             <i class="fas fa-circle fa-stack-2x text-light"></i>
-                             <i class="fas fa-th-large fa-stack-1x text-dark"></i>
-                         </span>
-                         <div class="mb-0">
-                             <div class="fs-lg-2hx fs-2x fw-bolder text-white d-flex flex-center">
-                                 <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="700"
-                                     data-kt-countup-suffix="+">0</div>
-                             </div>
-                             <span class="text-gray-600 fw-bold fs-5 lh-0">Known Companies</span>
-                         </div>
-                     </div>
 
-                     <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain"
-                         style="background-image: url('{{ asset('assets/media/svg/misc/octagon.svg') }}')">
-                         <span class="fa-stack fa-2x mb-3">
-                             <i class="fas fa-circle fa-stack-2x text-light"></i>
-                             <i class="fas fa-chart-pie fa-stack-1x text-dark"></i>
-                         </span>
-                         <div class="mb-0">
-                             <div class="fs-lg-2hx fs-2x fw-bolder text-white d-flex flex-center">
-                                 <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="80"
-                                     data-kt-countup-suffix="K+">0</div>
-                             </div>
-                             <span class="text-gray-600 fw-bold fs-5 lh-0">Statistic Reports</span>
-                         </div>
+             <div class="row">
+                 @if ($users->isEmpty())
+                     <div class="text-center my-5">
+                         <h5 class="text-muted">Belum ada User yang mengupload NFT</h5>
                      </div>
-
-                     <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain"
-                         style="background-image: url('{{ asset('assets/media/svg/misc/octagon.svg') }}')">
-                         <span class="fa-stack fa-2x mb-3">
-                             <i class="fas fa-circle fa-stack-2x text-light"></i>
-                             <i class="fas fa-smile fa-stack-1x text-dark"></i>
-                         </span>
-                         <div class="mb-0">
-                             <div class="fs-lg-2hx fs-2x fw-bolder text-white d-flex flex-center">
-                                 <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="96"
-                                     data-kt-countup-suffix="%">0</div>
+                 @else
+                     @foreach ($users as $user)
+                         <div class="col-md-4 mb-5">
+                             <div class="card m-3" style="width: 40rem;">
+                                 <div class="card-body">
+                                     <div class="mb-3 text-center">
+                                         <img src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('assets/media/avatars/blank.png') }}"
+                                             alt="{{ $user->name }}" class="rounded-circle w-100px h-100px mb-3">
+                                         <h5 class="fw-bold">{{ $user->name }}</h5>
+                                         <p class="text-gray-500 mb-4">{{ $user->email }}</p>
+                                     </div>
+                                     @php
+                                         $nft = $user->nfts->first();
+                                     @endphp
+                                     @if ($nft)
+                                         <div class="card mb-3">
+                                             <img src="{{ asset('storage/' . $nft->foto) }}" class="card-img-top"
+                                                 alt="{{ $nft->nama_nft }}">
+                                             <div class="card-body bg-secondary text-start">
+                                                 <h4 class="card-title fw-bold fs-3">{{ $nft->nama_nft }}</h4>
+                                                 <p class="card-text fs-5">{{ $nft->deskripsi }}</p>
+                                                 <span
+                                                     class="badge bg-info fs-6">{{ $nft->kategori->nama_kategori }}</span>
+                                                 <p class="mt-3 fs-5">
+                                                     <strong>Harga Awal:</strong> Rp
+                                                     {{ number_format($nft->harga_awal, 0, ',', '.') }}
+                                                 </p>
+                                                 <p class="text-success fs-5">
+                                                     <strong>Status:</strong> {{ ucfirst($nft->status) }}
+                                                 </p>
+                                             </div>
+                                         </div>
+                                     @else
+                                         <p class="text-muted text-center">No NFTs available for this user.</p>
+                                     @endif
+                                 </div>
                              </div>
-                             <span class="text-gray-600 fw-bold fs-5 lh-0">Positive Feedback</span>
                          </div>
-                     </div>
-                 </div>
+                     @endforeach
+                 @endif
              </div>
          </div>
      </div>
+
+
+
+
 
 
      <div class="py-10 py-lg-20">
@@ -449,7 +453,7 @@
                      </div>
                      <div class="text-center" id="kt_pricing">
                          <div class="nav-group landing-dark-bg d-inline-flex mb-15" data-kt-buttons="true"
-                             style="border: 1px dashed #2B4666;">
+                             style="border: 1px dashed #000000;">
                              <a href="#"
                                  class="btn btn-color-gray-600 btn-active btn-active-success px-6 py-3 me-2 active"
                                  data-kt-plan="month">Monthly</a>

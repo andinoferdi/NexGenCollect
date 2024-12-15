@@ -48,7 +48,7 @@ class UserVerifikasiController extends Controller
         'sosial_media_info' => $request->sosial_media_info,
     ]);
 
-    return redirect()->route('verifikasi.indexuser')->with('success', 'Verifikasi Anda telah dikirim dan menunggu approval.');
+    return redirect()->route('userpage.verifikasi.indexuser')->with('success', 'Verifikasi Anda telah dikirim dan menunggu approval.');
 }
 
 

@@ -19,10 +19,25 @@ class UserpageController extends Controller
         $teams = ApplicationSetting::all();
         $kategoris = Kategori::all();
         $nfts = Nft::with('kategori')->get();
+        $users = User::whereHas('nfts')->with('nfts')->get(); 
         
-        return view('userpage.index', compact('teams', 'nfts', 'kategoris'));
+        return view('userpage.index', compact('teams', 'nfts', 'kategoris',  'users'));
     }
 
+    public function indexnft(Request $request)
+    {
+        $kategoris = Kategori::all();
+        $nfts = Nft::with('kategori')->get();
+        
+        return view('userpage.nft', compact('nfts', 'kategoris'));
+    }
+
+    public function nftDetail($id)
+    {
+        $nft = Nft::with('kategori')->findOrFail($id);
+        $lelang = $nft->lelang()->where('status', 'open')->first();
+        return view('userpage.nft_detail', compact('nft', 'lelang'));
+    }
     public function accountSettinguser(Request $request)
     {
         return view('userpage.pages.account.setting', [
@@ -64,6 +79,6 @@ class UserpageController extends Controller
             ]);
         }
 
-        return redirect()->route('account_setting_user')->with('success', 'Profile updated successfully.');
+        return redirect()->route('userpage.account_setting_user')->with('success', 'Profile updated successfully.');
     }
 }

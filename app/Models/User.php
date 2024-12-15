@@ -36,4 +36,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function nfts()
+{
+    return $this->hasMany(Nft::class);
+}
 }

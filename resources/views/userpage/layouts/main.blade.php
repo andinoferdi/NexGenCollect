@@ -24,7 +24,7 @@
     <div class="d-flex flex-column flex-root">
         <div class="mb-0" id="home">
             <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg"
-                style="background-image: url({{ asset('assets/media/svg/illustrations/landing.svg') }})">
+                style=" background-color:#010001;">
                 @include('userpage.layouts.navbar')
                 @yield('content')
             </div>
@@ -43,7 +43,6 @@
             </span>
         </div>
     </div>
-    @yield('script')
     <script>
         var hostUrl = "{{ asset('assets/') }}";
     </script>
@@ -67,5 +66,6 @@
     <script src="{{ asset('assets/js/custom/landing.js') }}"></script>
     <script src="{{ asset('assets/js/custom/pages/company/pricing.js') }}"></script>
 </body>
+@yield('script')
 
 </html>

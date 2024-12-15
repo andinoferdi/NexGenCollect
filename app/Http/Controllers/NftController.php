@@ -27,30 +27,31 @@ class NftController extends Controller
     }
 
     public function store(NftRequestStore $request)
-{
-    $request->validated();
-
-    $file = $request->file('file');
-    $fileName = $file->getClientOriginalName();
-    $filePath = $file->storeAs('nft_files', $fileName, 'public');
-
-    $foto = $request->file('foto');
-    $fotoName = $foto->getClientOriginalName();
-    $fotoPath = $foto->storeAs('nft_photos', $fotoName, 'public'); 
-
-    Nft::create([
-        'nama_nft' => $request->nama_nft,
-        'file' => $filePath,
-        'foto' => $fotoPath,
-        'deskripsi' => $request->deskripsi,
-        'kategori_id' => $request->kategori_id,
-        'user_id' => $request->user_id,
-        'harga_awal' => $request->harga_awal,
-        'status' => $request->status,
-    ]);
-
-    return redirect()->route('nft.index')->with('success', 'NFT created successfully.');
-}
+    {
+        $request->validated();
+    
+        $file = $request->file('file');
+        $fileName = uniqid() . '_' . $file->getClientOriginalName(); // Tambahkan string random
+        $filePath = $file->storeAs('nft_files', $fileName, 'public');
+    
+        $foto = $request->file('foto');
+        $fotoName = uniqid() . '_' . $foto->getClientOriginalName(); // Tambahkan string random
+        $fotoPath = $foto->storeAs('nft_photos', $fotoName, 'public'); 
+    
+        Nft::create([
+            'nama_nft' => $request->nama_nft,
+            'file' => $filePath,
+            'foto' => $fotoPath,
+            'deskripsi' => $request->deskripsi,
+            'kategori_id' => $request->kategori_id,
+            'user_id' => $request->user_id,
+            'harga_awal' => $request->harga_awal,
+            'status' => $request->status,
+        ]);
+    
+        return redirect()->route('nft.index')->with('success', 'NFT created successfully.');
+    }
+    
 
 
     public function edit(Nft $nft)
@@ -60,38 +61,39 @@ class NftController extends Controller
         return view('dashboard.pages.nft.edit', compact('nft', 'kategoris', 'users'));
     }
 
-  public function update(NftRequestUpdate $request, Nft $nft)
-{
-    $request->validated();
-
-    $data = $request->only(['nama_nft', 'deskripsi', 'kategori_id', 'user_id', 'harga_awal', 'status']);
-
-    if ($request->hasFile('file')) {
-        if ($nft->file) {
-            Storage::disk('public')->delete($nft->file);
+    public function update(NftRequestUpdate $request, Nft $nft)
+    {
+        $request->validated();
+    
+        $data = $request->only(['nama_nft', 'deskripsi', 'kategori_id', 'user_id', 'harga_awal', 'status']);
+    
+        if ($request->hasFile('file')) {
+            if ($nft->file) {
+                Storage::disk('public')->delete($nft->file);
+            }
+    
+            $file = $request->file('file');
+            $fileName = uniqid() . '_' . $file->getClientOriginalName(); // Tambahkan string random
+            $filePath = $file->storeAs('nft_files', $fileName, 'public');
+            $data['file'] = $filePath;
         }
-
-        $file = $request->file('file');
-        $fileName = time() . '_' . $file->getClientOriginalName();
-        $filePath = $file->storeAs('nft_files', $fileName, 'public');
-        $data['file'] = $filePath;
-    }
-
-    if ($request->hasFile('foto')) {
-        if ($nft->foto) {
-            Storage::disk('public')->delete($nft->foto);
+    
+        if ($request->hasFile('foto')) {
+            if ($nft->foto) {
+                Storage::disk('public')->delete($nft->foto);
+            }
+    
+            $foto = $request->file('foto');
+            $fotoName = uniqid() . '_' . $foto->getClientOriginalName(); // Tambahkan string random
+            $fotoPath = $foto->storeAs('nft_photos', $fotoName, 'public');
+            $data['foto'] = $fotoPath;
         }
-
-        $foto = $request->file('foto');
-        $fotoName = time() . '_' . $foto->getClientOriginalName(); 
-        $fotoPath = $foto->storeAs('nft_photos', $fotoName, 'public');
-        $data['foto'] = $fotoPath;
+    
+        $nft->update($data);
+    
+        return redirect()->route('nft.index')->with('success', 'NFT updated successfully.');
     }
-
-    $nft->update($data);
-
-    return redirect()->route('nft.index')->with('success', 'NFT updated successfully.');
-}
+    
 
 
     public function show(Nft $nft)

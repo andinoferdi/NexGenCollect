@@ -30,4 +30,15 @@ class Nft extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function keranjang()
+    {
+        return $this->hasMany(keranjang::class);
+    }
+
+    public function lelang()
+{
+    return $this->hasOne(Lelang::class, 'nft_id');
+}
+
 }

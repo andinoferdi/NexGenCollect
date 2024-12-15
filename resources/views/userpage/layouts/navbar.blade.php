@@ -1,6 +1,6 @@
 <div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header"
     data-kt-sticky-offset="{default: '200px', lg: '300px'}">
-    <div class="container">
+    <div class="container pb-0">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center flex-equal">
                 <button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
@@ -38,27 +38,9 @@
                                 data-kt-drawer-dismiss="true">Home</a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link nav-link {{ Request::is('how-it-works') ? 'active' : '' }} py-3 px-4 px-xxl-6"
-                                href="#how-it-works" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">How it
-                                Works</a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link nav-link {{ Request::is('achievements') ? 'active' : '' }} py-3 px-4 px-xxl-6"
-                                href="#achievements" data-kt-scroll-toggle="true"
-                                data-kt-drawer-dismiss="true">Achievements</a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link nav-link {{ Request::is('team') ? 'active' : '' }} py-3 px-4 px-xxl-6"
-                                href="#team" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Team</a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link nav-link {{ Request::is('portfolio') ? 'active' : '' }} py-3 px-4 px-xxl-6"
-                                href="#portfolio" data-kt-scroll-toggle="true"
-                                data-kt-drawer-dismiss="true">Portfolio</a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link nav-link {{ Request::is('pricing') ? 'active' : '' }} py-3 px-4 px-xxl-6"
-                                href="#pricing" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Pricing</a>
+                            <a class="menu-link nav-link {{ request()->is('nft') || request()->is('nft/detail/*') ? 'active' : '' }} py-3 px-4 px-xxl-6"
+                                href="{{ route('userpage.nft') }}" data-kt-scroll-toggle="true"
+                                data-kt-drawer-dismiss="true">NFT</a>
                         </div>
                     </div>
 
@@ -103,11 +85,11 @@
                             </div>
                             <div class="separator my-2"></div>
                             <div class="menu-item px-5 my-1">
-                                <a href="{{ route('account_setting_user') }}" class="menu-link px-5">Account
+                                <a href="{{ route('userpage.account_setting_user') }}" class="menu-link px-5">Account
                                     Settings</a>
                             </div>
                             <div class="menu-item px-5 my-1">
-                                <a href="{{ route('verifikasi.indexuser') }}" class="menu-link px-5">Jadi
+                                <a href="{{ route('userpage.verifikasi.indexuser') }}" class="menu-link px-5">Jadi
                                     Seniman</a>
                             </div>
                             <div class="menu-item px-5">
