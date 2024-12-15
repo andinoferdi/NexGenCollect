@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Nft;
 use App\Models\Kategori;
+use App\Models\PenawaranLelang;
 use App\Models\ApplicationSetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -35,9 +36,16 @@ class UserpageController extends Controller
     public function nftDetail($id)
     {
         $nft = Nft::with('kategori')->findOrFail($id);
-        $lelang = $nft->lelang()->first();
-        return view('userpage.nft_detail', compact('nft', 'lelang'));
+        $lelang = $nft->lelang()->first(); 
+        $highestBid = null;
+        if ($lelang) {
+            $highestBid = PenawaranLelang::where('lelang_id', $lelang->id)->max('harga');
+        }
+    
+        return view('userpage.nft_detail', compact('nft', 'lelang', 'highestBid'));
     }
+    
+
     public function accountSettinguser(Request $request)
     {
         return view('userpage.pages.account.setting', [

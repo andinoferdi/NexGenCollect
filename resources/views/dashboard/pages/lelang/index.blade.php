@@ -21,6 +21,7 @@
                         <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
                             <thead>
                                 <tr class="fw-bolder text-muted">
+                                    <th class="min-w-150px">Foto</th>
                                     <th class="min-w-150px">NFT Name</th>
                                     <th class="min-w-150px">Start Date</th>
                                     <th class="min-w-150px">End Date</th>
@@ -32,12 +33,16 @@
                             <tbody>
                                 @foreach ($lelangs as $lelang)
                                     <tr>
+                                        <td>
+                                            <img src="{{ asset('storage/' . $lelang->nft->foto) }}" alt="NFT Photo"
+                                                class="img-thumbnail" width="80">
+                                        </td>
                                         <td>{{ $lelang->nft->nama_nft }}</td>
                                         <td>{{ $lelang->tanggal_awal }}</td>
                                         <td>{{ $lelang->tanggal_akhir }}</td>
                                         <td>{{ ucfirst($lelang->status) }}</td>
                                         <td>
-                                            {{ $lelang->status === 'closed' ? $lelang->pemenang->user->name : '-' }}
+                                            {{ $lelang->status === 'closed' ? $lelang->pemenang->user->name : 'Belum ada pemenang' }}
                                         </td>
                                         <td class="text-end">
                                             @if ($lelang->status === 'closed')

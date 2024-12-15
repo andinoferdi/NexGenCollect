@@ -41,20 +41,20 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            const today = new Date().toISOString().split('T')[0]; // Tanggal hari ini (YYYY-MM-DD)
+            const today = new Date().toISOString().split('T')[0];
 
             $('#tanggal_awal').flatpickr({
                 enableTime: true,
                 dateFormat: "Y-m-d H:i",
                 time_24hr: true,
-                minDate: today // Tanggal awal tidak boleh kurang dari hari ini
+                minDate: today
             });
 
             $('#tanggal_akhir').flatpickr({
                 enableTime: true,
                 dateFormat: "Y-m-d H:i",
                 time_24hr: true,
-                minDate: today // Tanggal akhir tidak boleh kurang dari hari ini
+                minDate: today
             });
         });
     </script>

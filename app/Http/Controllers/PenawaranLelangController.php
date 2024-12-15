@@ -6,6 +6,7 @@ use App\Models\Lelang;
 use App\Models\PenawaranLelang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PenawaranLelangRequest;
 
 class PenawaranLelangController extends Controller
 {
@@ -20,42 +21,40 @@ class PenawaranLelangController extends Controller
         return view('userpage.penawaran_lelang', compact('lelang', 'penawaran'));
     }
 
-    public function store(Request $request, $lelangId)
-    {
-        $request->validate([
-            'harga' => 'required|numeric|min:1',
-        ]);
+   public function store(PenawaranLelangRequest $request, $lelangId)
+{
+    $validated = $request->validated();
 
-        $lelang = Lelang::with('nft')->findOrFail($lelangId);
+    $lelang = Lelang::with('nft')->findOrFail($lelangId);
 
-        if ($lelang->status === 'closed') {
-            return redirect()->back()->with('error', 'Lelang telah selesai.');
-        }
-
-        $hargaAwal = $lelang->nft->harga_awal;
-        $highestBid = PenawaranLelang::where('lelang_id', $lelangId)->max('harga');
-        $minBid = $highestBid ? $highestBid + 1 : $hargaAwal;
-
-        if ($request->harga < $minBid) {
-            return redirect()->back()->with('error', "Penawaran harus lebih besar dari Rp " . number_format($minBid, 0, ',', '.'));
-        }
-
-        $penawaran = PenawaranLelang::where('user_id', auth()->id())
-            ->where('lelang_id', $lelangId)
-            ->first();
-
-        if ($penawaran) {
-            $penawaran->update(['harga' => $request->harga]);
-        } else {
-            PenawaranLelang::create([
-                'user_id' => auth()->id(),
-                'lelang_id' => $lelangId,
-                'harga' => $request->harga,
-            ]);
-        }
-
-        return redirect()->back()->with('success', 'Penawaran berhasil diperbarui.');
+    if ($lelang->status === 'closed') {
+        return redirect()->back()->with('error', 'Lelang telah selesai.');
     }
+
+    $hargaAwal = $lelang->nft->harga_awal;
+    $highestBid = PenawaranLelang::where('lelang_id', $lelangId)->max('harga');
+    $minBid = $highestBid ? $highestBid + 1 : $hargaAwal;
+
+    if ($validated['harga'] < $minBid) {
+        return redirect()->back()->with('error', "Penawaran harus lebih besar dari Rp " . number_format($minBid, 0, ',', '.'));
+    }
+
+    $penawaran = PenawaranLelang::where('user_id', auth()->id())
+        ->where('lelang_id', $lelangId)
+        ->first();
+
+    if ($penawaran) {
+        $penawaran->update(['harga' => $validated['harga']]);
+    } else {
+        PenawaranLelang::create([
+            'user_id' => auth()->id(),
+            'lelang_id' => $lelangId,
+            'harga' => $validated['harga'],
+        ]);
+    }
+
+    return redirect()->back()->with('success', 'Penawaran berhasil diperbarui.');
+}
 
     public function highestBid($lelangId)
     {

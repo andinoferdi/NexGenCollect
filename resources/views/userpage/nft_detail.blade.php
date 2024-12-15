@@ -55,19 +55,40 @@
                     @endif
                 </div>
 
+
+                @if ($lelang && $highestBid)
+                    <div class="form-group mb-5">
+                        <label class="form-label text-dark fw-bold">Harga Penawaran Tertinggi</label>
+                        <p class="text-success">Rp {{ number_format($highestBid, 0, ',', '.') }}</p>
+                    </div>
+                @elseif ($lelang)
+                    <p class="text-muted">Belum ada penawaran untuk lelang ini.</p>
+                @endif
+
                 <div class="form-group mb-5">
                     <label class="form-label text-dark fw-bold">Lelang Status</label>
                     @if ($lelang)
-                        <div id="countdown" class="text-center text-muted mb-3"></div>
+                        <div id="countdown" class="text-center mb-3"></div>
                         @if ($lelang->status === 'closed')
                             <div class="text-center mb-3">
-                                <h5 class="text-danger fw-bold">Pemenang Lelang:
-                                    {{ $lelang->pemenang ? $lelang->pemenang->user->name : '-' }}</h5>
+                                @if ($lelang->pemenang)
+                                    <h5 class="text-danger fw-bold">Pemenang Lelang:
+                                        {{ $lelang->pemenang->user->name }}</h5>
+                                @else
+                                    <h5 class="text-danger fw-bold">Lelang selesai, tetapi tidak ada pemenang.</h5>
+                                    <p class="text-muted">NFT ini telah ditambahkan ke keranjang Anda.</p>
+                                @endif
                             </div>
                         @else
-                            <div id="lelang-button" class="d-none">
-                                <a href="{{ route('penawaran.index', $lelang->id) }}" class="btn btn-success w-50">Buat
-                                    Penawaran</a>
+                            <div class="text-center mb-3">
+                                <div id="lelang-button" class="d-none mb-3">
+                                    <a href="{{ route('penawaran.index', $lelang->id) }}"
+                                        class="btn btn-primary btn-lg">Buat Penawaran</a>
+                                </div>
+                                <div class="alert alert-warning text-center mx-auto" style="max-width: 600px;"
+                                    role="alert">
+                                    <strong>Lelang Dimulai!</strong> Segera ajukan penawaran sebelum lelang berakhir.
+                                </div>
                             </div>
                         @endif
                     @else

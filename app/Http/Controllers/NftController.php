@@ -31,11 +31,11 @@ class NftController extends Controller
         $request->validated();
     
         $file = $request->file('file');
-        $fileName = uniqid() . '_' . $file->getClientOriginalName(); // Tambahkan string random
+        $fileName = uniqid() . '_' . $file->getClientOriginalName();
         $filePath = $file->storeAs('nft_files', $fileName, 'public');
     
         $foto = $request->file('foto');
-        $fotoName = uniqid() . '_' . $foto->getClientOriginalName(); // Tambahkan string random
+        $fotoName = uniqid() . '_' . $foto->getClientOriginalName();
         $fotoPath = $foto->storeAs('nft_photos', $fotoName, 'public'); 
     
         Nft::create([
@@ -73,7 +73,7 @@ class NftController extends Controller
             }
     
             $file = $request->file('file');
-            $fileName = uniqid() . '_' . $file->getClientOriginalName(); // Tambahkan string random
+            $fileName = uniqid() . '_' . $file->getClientOriginalName();
             $filePath = $file->storeAs('nft_files', $fileName, 'public');
             $data['file'] = $filePath;
         }
@@ -84,7 +84,7 @@ class NftController extends Controller
             }
     
             $foto = $request->file('foto');
-            $fotoName = uniqid() . '_' . $foto->getClientOriginalName(); // Tambahkan string random
+            $fotoName = uniqid() . '_' . $foto->getClientOriginalName();
             $fotoPath = $foto->storeAs('nft_photos', $fotoName, 'public');
             $data['foto'] = $fotoPath;
         }

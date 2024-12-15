@@ -34,21 +34,13 @@ Route::prefix('')->group(function () {
     Route::put('/account/update/{user}', [UserpageController::class, 'updateprofileuser'])->name('userpage.updateprofile_user');
     Route::get('verifikasi', [UserVerifikasiController::class, 'indexUser'])->name('userpage.verifikasi.indexuser');
     Route::post('verifikasi', [UserVerifikasiController::class, 'store'])->name('userpage.verifikasi.store');
-
-Route::prefix('penawaran')->middleware(['auth'])->group(function () {
-    Route::get('/lelang/{lelangId}', [PenawaranLelangController::class, 'index'])->name('penawaran.index');
-    Route::post('/lelang/{lelangId}', [PenawaranLelangController::class, 'store'])->name('penawaran.store');
-    Route::get('/lelang/{lelangId}/highest-bid', [PenawaranLelangController::class, 'highestBid'])->name('penawaran.highestBid');
-    Route::delete('/{id}', [PenawaranLelangController::class, 'destroy'])->name('penawaran.destroy');
-});
-
-    Route::prefix('keranjang')->group(function () {
-        Route::get('/', [KeranjangController::class, 'index'])->name('keranjang.index');
-        Route::post('/add/{id}', [KeranjangController::class, 'store'])->name('keranjang.store');
-        Route::put('/update/{id}', [KeranjangController::class, 'update'])->name('keranjang.update');
-        Route::put('/mass-update', [KeranjangController::class, 'massUpdate'])->name('keranjang.massUpdate');
-        Route::delete('/remove/{id}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
+    Route::prefix('penawaran')->middleware(['auth'])->group(function () {
+        Route::get('/lelang/{lelangId}', [PenawaranLelangController::class, 'index'])->name('penawaran.index');
+        Route::post('/lelang/{lelangId}', [PenawaranLelangController::class, 'store'])->name('penawaran.store');
+        Route::get('/lelang/{lelangId}/highest-bid', [PenawaranLelangController::class, 'highestBid'])->name('penawaran.highestBid');
+        Route::delete('/{id}', [PenawaranLelangController::class, 'destroy'])->name('penawaran.destroy');
     });
+    Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
 });
 
 Route::prefix('dashboard')->middleware('auth.custom')->group(function () {

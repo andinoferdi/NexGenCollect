@@ -2,61 +2,65 @@
 
 @section('content')
     <div class="container mt-5">
-        <h3 class="text-center mb-4 text-white">Keranjang Belanja</h3>
-
+        <h2 class="text-center mb-4 text-white">Keranjang Anda</h2>
         @if ($keranjangs->isEmpty())
-            <div class="text-center my-5">
-                <h5 class="text-white">Keranjang Anda kosong</h5>
+            <div class="alert alert-info text-center">
+                <p>Keranjang Anda kosong. Silahkan menangkan NFT melalui lelang!</p>
             </div>
         @else
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="text-white">#</th>
-                            <th class="text-white">Nama NFT</th>
-                            <th class="text-white">Harga</th>
-                            <th class="text-white">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $total = 0;
-                        @endphp
-                        @foreach ($keranjangs as $key => $keranjang)
-                            @php
-                                $total += $keranjang->nft->harga_awal;
-                            @endphp
-                            <tr>
-                                <td class="text-white">{{ $key + 1 }}</td>
-                                <td class="text-white">{{ $keranjang->nft->nama_nft }}</td>
-                                <td class="text-white">Rp{{ number_format($keranjang->nft->harga_awal, 0, ',', '.') }}</td>
-                                <td>
-                                    <a href="{{ route('keranjang.destroy', $keranjang->id) }}" class="btn btn-danger btn-sm"
-                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $keranjang->id }}').submit();">
-                                        Hapus
-                                    </a>
-                                    <form id="delete-form-{{ $keranjang->id }}"
-                                        action="{{ route('keranjang.destroy', $keranjang->id) }}" method="POST"
-                                        style="display: none;">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="table-responsive">
+                        <div class="card bg-white shadow-sm">
+                            <div class="card-body">
+                                <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                                    <thead class="table-dark">
+                                        <tr class="fw-bold text-white">
+                                            <th class="text-center">No</th>
+                                            <th class="text-center">Foto</th>
+                                            <th class="text-center">Nama NFT</th>
+                                            <th class="text-center">Harga</th>
+                                            <th class="text-center">Tanggal Ditambahkan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($keranjangs as $index => $keranjang)
+                                            <tr>
+                                                <td class="text-center">{{ $index + 1 }}</td>
+                                                <td class="text-center">
+                                                    <img src="{{ asset('storage/' . $keranjang->nft->foto) }}"
+                                                        alt="NFT" class="img-thumbnail"
+                                                        style="width: 100px; height: 100px; object-fit: cover;">
+                                                </td>
+                                                <td class="text-center text-black fw-bold">{{ $keranjang->nft->nama_nft }}
+                                                </td>
+                                                <td class="text-center text-black fw-bold">
+                                                    {{ number_format($keranjang->nft->harga_akhir, 0, ',', '.') }}
+                                                </td>
+                                                <td class="text-center text-black">
+                                                    {{ $keranjang->created_at->format('d M Y H:i') }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Total Harga -->
-            <div class="text-right">
-                <h5 class="text-white">Total Harga: Rp{{ number_format($total, 0, ',', '.') }}</h5>
-            </div>
-
-            <!-- Tombol Proses Pembayaran -->
-            <div class="text-right mt-4">
-                {{-- <a href="{{ route('checkout') }}" class="btn btn-success">Proses Pembayaran</a> --}}
+                <div class="col-md-4">
+                    <div class="card bg-white shadow-sm">
+                        <div class="card-body">
+                            <h5 class="text-center">Total Harga</h5>
+                            <p class="text-center text-muted">Total harga dari NFT yang ada di keranjang</p>
+                            <hr>
+                            <div class="text-center">
+                                <h4 class="fw-bold">Rp {{ number_format($totalHarga, 0, ',', '.') }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         @endif
     </div>

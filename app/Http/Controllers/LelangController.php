@@ -12,9 +12,44 @@ class LelangController extends Controller
 {
     public function index()
     {
+        $expiredLelangs = Lelang::where('status', 'open')
+            ->where('tanggal_akhir', '<=', now())
+            ->get();
+
+        foreach ($expiredLelangs as $lelang) {
+            $highestBid = PenawaranLelang::where('lelang_id', $lelang->id)->max('harga');
+
+            if (!$highestBid) {
+                $lelang->nft->update([
+                    'status' => 'available',
+                    'harga_akhir' => null,
+                ]);
+            } else {
+                $highestBidder = PenawaranLelang::where('lelang_id', $lelang->id)
+                    ->where('harga', $highestBid)
+                    ->first();
+
+                $lelang->nft->update([
+                    'status' => 'sold',
+                    'harga_akhir' => $highestBid,
+                ]);
+
+                Keranjang::create([
+                    'user_id' => $highestBidder->user_id,
+                    'nft_id' => $lelang->nft_id,
+                ]);
+            }
+
+            $lelang->update([
+                'status' => 'closed',
+                'harga_akhir' => $highestBid ?? null,
+            ]);
+        }
+
         $lelangs = Lelang::with('nft')->get();
         return view('dashboard.pages.lelang.index', compact('lelangs'));
     }
+
 
     public function create()
     {
@@ -54,31 +89,6 @@ class LelangController extends Controller
         return redirect()->route('lelang.index')->with('success', 'Auction created successfully.');
     }
 
-    public function edit(Lelang $lelang)
-    {
-        $nfts = Nft::all();
-        return view('dashboard.pages.lelang.edit', compact('lelang', 'nfts'));
-    }
-
-    public function update(Request $request, Lelang $lelang)
-    {
-        $request->validate([
-            'nft_id' => 'required|exists:nfts,id',
-            'tanggal_awal' => 'required|date',
-            'tanggal_akhir' => 'required|date|after:tanggal_awal',
-            'status' => 'required|in:open,closed',
-        ]);
-
-        $lelang->update([
-            'nft_id' => $request->nft_id,
-            'tanggal_awal' => $request->tanggal_awal,
-            'tanggal_akhir' => $request->tanggal_akhir,
-            'status' => $request->status,
-        ]);
-
-        return redirect()->route('lelang.index')->with('success', 'Lelang updated successfully.');
-    }
-
     public function stop(Lelang $lelang)
     {
         if (now() < $lelang->tanggal_awal) {
@@ -86,16 +96,37 @@ class LelangController extends Controller
         }
 
         $highestBid = PenawaranLelang::where('lelang_id', $lelang->id)->max('harga');
-    
-        $lelang->update(['status' => 'closed', 'harga_akhir' => $highestBid]);
+
+        if (!$highestBid) {
+            $lelang->nft->update([
+                'status' => 'available',
+                'harga_akhir' => null,
+            ]);
+            return redirect()->route('lelang.index')->with('success', 'Auction closed with no bids. NFT status is available.');
+        }
+
+        $highestBidder = PenawaranLelang::where('lelang_id', $lelang->id)
+            ->where('harga', $highestBid)
+            ->first();
+
+        $lelang->nft->update([
+            'status' => 'sold',
+            'harga_akhir' => $highestBid,
+        ]);
 
         Keranjang::create([
-            'user_id' => $lelang->pemenang->user_id,
-            'nft_id' => $lelang->pemenang->nft_id,
+            'user_id' => $highestBidder->user_id,
+            'nft_id' => $lelang->nft_id,
         ]);
-        return redirect()->route('lelang.index')->with('success', 'Auction has been stopped successfully.');
+
+        $lelang->update([
+            'status' => 'closed',
+            'harga_akhir' => $highestBid,
+        ]);
+
+        return redirect()->route('lelang.index')->with('success', 'Auction stopped successfully. NFT status is now sold.');
     }
-    
+
 
     public function destroy(Lelang $lelang)
     {

@@ -46,14 +46,30 @@
 
                 </div>
             </div>
+
+
             <div class="flex-equal text-end ms-1">
                 @if (auth()->check())
                     @php
                         $userRole = auth()->user()->role_id;
+                        $totalKeranjang = \App\Models\Keranjang::where('user_id', auth()->id())->count();
                     @endphp
+
                     @if ($userRole == 1 || $userRole == 3)
-                        <a href="{{ route('dashboard') }}" class="btn btn-primary">Dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="btn btn-primary me-3">Dashboard</a>
                     @else
+                        <!-- Icon Keranjang -->
+                        <a href="{{ route('keranjang.index') }}" class="position-relative me-4">
+                            <i class="fas fa-shopping-cart text-white fs-3"></i>
+                            @if ($totalKeranjang > 0)
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    {{ $totalKeranjang }}
+                                </span>
+                            @endif
+                        </a>
+
+                        <!-- User Profile -->
                         <div class="cursor-pointer symbol symbol-40px" data-kt-menu-trigger="click"
                             data-kt-menu-overflow="true" data-kt-menu-placement="top-start" data-bs-toggle="tooltip"
                             data-bs-placement="right" data-bs-dismiss="click" title="User profile">
@@ -61,6 +77,7 @@
                                 alt="image" class="rounded-circle" />
                         </div>
 
+                        <!-- Dropdown Menu -->
                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
                             data-kt-menu="true">
                             <div class="menu-item px-3">
@@ -108,6 +125,7 @@
                     <a href="{{ route('login') }}" class="btn btn-success">Sign In</a>
                 @endif
             </div>
+
         </div>
     </div>
 </div>
