@@ -12,21 +12,22 @@
 NexGen Collect adalah platform berbasis web yang dibangun dengan Laravel untuk mengelola, menampilkan, dan memperdagangkan aset digital dalam bentuk NFT (Non-Fungible Token). Platform ini dirancang untuk memberikan pengalaman inovatif bagi seniman, kolektor, dan investor dalam dunia aset digital. Dengan memanfaatkan teknologi blockchain untuk memastikan keaslian dan keamanan setiap karya yang diperdagangkan.
 
 Fitur-fitur utama NexGen Collect meliputi:
-- **Manajemen Koleksi NFT** – Seniman dapat mengunggah dan mengelola karya mereka sebagai NFT dalam berbagai format seperti gambar, audio, atau video.
-- **Metadata Customizable** – Setiap karya memiliki metadata unik yang dapat disesuaikan, mencakup detail seperti teknik, tahun pembuatan, dan tema.
-- **Sistem Pelelangan** – Menyediakan opsi lelang bagi seniman, di mana pengguna dapat bersaing untuk mendapatkan karya dengan penawaran tertinggi.
-- **Royalti Otomatis** – Seniman akan mendapatkan royalti setiap kali karya mereka dijual kembali di pasar sekunder.
-- **Karya Eksklusif dan Edisi Terbatas** – Seniman dapat memilih untuk membuat NFT dengan jumlah edisi terbatas.
-- **Dashboard Analitik** – Menyediakan statistik dan analisis bagi seniman untuk memahami performa karya dan tren pasar.
-- **Manajemen Pembayaran dengan Midtrans** – Mendukung transaksi aman dengan integrasi payment gateway Midtrans.
-- **Fitur Komunitas** – Memberikan ruang bagi pengguna untuk berinteraksi dan saling mendukung dalam komunitas.
-- **Sumber Daya Edukasi** – Menyediakan panduan dan informasi seputar NFT dan cara menggunakannya.
+
+-   **Manajemen Koleksi NFT** – Seniman dapat mengunggah dan mengelola karya mereka sebagai NFT dalam berbagai format seperti gambar, audio, atau video.
+-   **Metadata Customizable** – Setiap karya memiliki metadata unik yang dapat disesuaikan, mencakup detail seperti teknik, tahun pembuatan, dan tema.
+-   **Sistem Pelelangan** – Menyediakan opsi lelang bagi seniman, di mana pengguna dapat bersaing untuk mendapatkan karya dengan penawaran tertinggi.
+-   **Royalti Otomatis** – Seniman akan mendapatkan royalti setiap kali karya mereka dijual kembali di pasar sekunder.
+-   **Karya Eksklusif dan Edisi Terbatas** – Seniman dapat memilih untuk membuat NFT dengan jumlah edisi terbatas.
+-   **Dashboard Analitik** – Menyediakan statistik dan analisis bagi seniman untuk memahami performa karya dan tren pasar.
+-   **Manajemen Pembayaran dengan Midtrans** – Mendukung transaksi aman dengan integrasi payment gateway Midtrans.
+-   **Fitur Komunitas** – Memberikan ruang bagi pengguna untuk berinteraksi dan saling mendukung dalam komunitas.
+-   **Sumber Daya Edukasi** – Menyediakan panduan dan informasi seputar NFT dan cara menggunakannya.
 
 ## Belajar tentang NexGen Collect
 
 Dibangun dengan Laravel, NexGen Collect memanfaatkan kekuatan framework yang andal dan fleksibel ini. Laravel menghadirkan pengalaman pengembangan yang cepat dan aman, serta mendukung fungsionalitas kompleks seperti sistem pembayaran dan integrasi API. Platform ini menggunakan pendekatan modern untuk menggabungkan marketplace digital dengan komunitas kreatif.
 
-Bagi Anda yang ingin mempelajari lebih lanjut tentang Laravel, kami sarankan untuk mengunjungi [Laravel Documentation](https://laravel.com/docs) dan [Laravel Bootcamp](https://bootcamp.laravel.com). 
+Bagi Anda yang ingin mempelajari lebih lanjut tentang Laravel, kami sarankan untuk mengunjungi [Laravel Documentation](https://laravel.com/docs) dan [Laravel Bootcamp](https://bootcamp.laravel.com).
 
 ## Kontribusi
 
@@ -39,3 +40,9 @@ Jika Anda menemukan kerentanan keamanan di dalam NexGen Collect, mohon kirimkan 
 ## Lisensi
 
 NexGen Collect adalah perangkat lunak open-source yang dilisensikan di bawah [MIT license](https://opensource.org/licenses/MIT).
+
+## Dokumentasi
+
+Laporan Kinerja Tim: https://docs.google.com/document/d/1ubQxztUjDL01j7VQo7ZyeAz0gOldz3H8AP2fOYGDQKI/edit?usp=sharing
+
+UI Wireframe: https://www.figma.com/design/DrsKr2reDDyiaIhqzRHgBm/PWBF?node-id=0-1&p=f&t=sKoYEcibjvtgmnXn-0
