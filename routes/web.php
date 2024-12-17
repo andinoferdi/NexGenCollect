@@ -18,8 +18,7 @@ use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PenawaranLelangController;
 use App\Http\Controllers\NftUserController;
 use App\Http\Controllers\CheckoutController;
-
-
+use App\Http\Controllers\KomentarController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [LoginController::class, 'indexlogin'])->name('login');
@@ -54,10 +53,9 @@ Route::prefix('')->group(function () {
         Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
         Route::post('/midtrans/notification', [CheckoutController::class, 'notification'])->name('midtrans.notification');
         Route::get('/checkout_sukses/{checkoutId}', [CheckoutController::class, 'simulateSuccess']);
-
-
-
         Route::get('/nft_user', [NftUserController::class, 'index'])->name('userpage.nft_user');
+        Route::post('/komentar', [UserpageController::class, 'storeKomentar'])->name('komentar.store.user');
+        Route::delete('/komentar/{id}', [UserpageController::class, 'deleteKomentar'])->name('komentar.delete.user');
     });
 });
 
@@ -83,4 +81,6 @@ Route::prefix('dashboard')->middleware('auth.custom')->group(function () {
     Route::post('verifikasi/{userVerifikasi}/reject', [UserVerifikasiController::class, 'reject'])->name('verifikasi.reject');
     Route::resource('lelang', LelangController::class);
     Route::put('/lelang/{lelang}/stop', [LelangController::class, 'stop'])->name('lelang.stop');
+    Route::resource('komentar', KomentarController::class);
+
 });

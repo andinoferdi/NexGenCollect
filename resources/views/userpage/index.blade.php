@@ -754,139 +754,107 @@
          </div>
 
 
+
          <div class="mt-20 mb-20 position-relative z-index-2">
              <div class="container">
                  <div class="text-center mb-17">
-                     <h3 class="fs-2hx text-dark mb-5" id="clients" data-kt-scroll-offset="{default: 125, lg: 150}">
-                         What Our Clients Say</h3>
-                     <div class="fs-5 text-muted fw-bold">Save thousands to millions of bucks by using single tool
-                         <br />for different amazing and great useful admin
+                     <h3 class="fs-2hx text-dark mb-5">Apa yang Client Kami Bilang</h3>
+                     <div class="fs-5 text-muted fw-bold">
+                         Ini adalah komentar para user user kami
+                         <br />
                      </div>
                  </div>
+
+                 <!-- Daftar Komentar -->
                  <div class="row g-lg-10 mb-10 mb-lg-20">
-                     <div class="col-lg-4">
-                         <div
-                             class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
-                             <div class="mb-7">
-                                 <div class="rating mb-6">
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
+                     @foreach ($komentars as $komentar)
+                         <div class="col-lg-4">
+                             <div
+                                 class="d-flex flex-column justify-content-between h-100 bg-dark text-white p-4 rounded shadow-lg">
+
+                                 <div class="d-flex align-items-center mt-auto">
+                                     <div class="symbol symbol-circle symbol-50px me-4">
+                                         <img src="{{ $komentar->user->foto ? asset('storage/' . $komentar->user->foto) : asset('assets/media/avatars/blank.png') }}"
+                                             alt="user-avatar" class="img-fluid" />
                                      </div>
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
+                                     <div>
+                                         <span class="fw-bolder text-white d-block">{{ $komentar->user->name }}</span>
+                                         <span class="text-light d-block">{{ $komentar->user->role->nama_role }}</span>
                                      </div>
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
-                                     </div>
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
-                                     </div>
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
-                                     </div>
+                                     @if ($komentar->user_id === Auth::id())
+                                         <form action="{{ route('komentar.delete.user', $komentar->id) }}" method="POST"
+                                             class="ms-auto">
+                                             @csrf
+                                             @method('DELETE')
+                                             <button type="submit"
+                                                 class="btn btn-sm btn-danger d-flex align-items-center">
+                                                 <i class="fas fa-trash me-1"></i> Hapus
+                                             </button>
+                                         </form>
+                                     @endif
                                  </div>
-                                 <div class="fs-2 fw-bolder text-dark mb-3">This is by far the cleanest template
-                                     <br />and the most well structured
-                                 </div>
-                                 <div class="text-gray-500 fw-bold fs-4">The most well thought out design theme I have
-                                     ever used. The codes are up to tandard. The css styles are very clean. In fact the
-                                     cleanest and the most up to standard I have ever seen.</div>
-                             </div>
-                             <div class="d-flex align-items-center">
-                                 <div class="symbol symbol-circle symbol-50px me-5">
-                                     <img src="assets/media/avatars/150-2.jpg" class="" alt="" />
-                                 </div>
-                                 <div class="flex-grow-1">
-                                     <a href="#" class="text-dark fw-bolder text-hover-primary fs-6">Paul
-                                         Miles</a>
-                                     <span class="text-muted d-block fw-bold">Development Lead</span>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="col-lg-4">
-                         <div
-                             class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
-                             <div class="mb-7">
-                                 <div class="rating mb-6">
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
+
+                                 <div class="mt-4">
+                                     <div class="mb-2">
+                                         @for ($i = 1; $i <= 5; $i++)
+                                             @if ($i <= $komentar->rating)
+                                                 <i class="fas fa-star text-warning"></i>
+                                             @else
+                                                 <i class="far fa-star text-secondary"></i>
+                                             @endif
+                                         @endfor
                                      </div>
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
+                                     <div class="fs-5 mb-2 text-light">
+                                         <h2 class="text-light"> {{ $komentar->komentar }}</h2>
                                      </div>
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
-                                     </div>
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
-                                     </div>
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
-                                     </div>
+
+                                     <hr>
+                                     @if ($komentar->balasan_admin)
+                                         <div class="fs-6 mt-3">
+                                             <h5>
+                                                 <span class="text-danger">Balasan Admin:</span>
+                                                 <span class="text-white">{{ $komentar->balasan_admin }}</span>
+                                             </h5>
+                                         </div>
+                                     @endif
                                  </div>
-                                 <div class="fs-2 fw-bolder text-dark mb-3">This is by far the cleanest template
-                                     <br />and the most well structured
-                                 </div>
-                                 <div class="text-gray-500 fw-bold fs-4">The most well thought out design theme I have
-                                     ever used. The codes are up to tandard. The css styles are very clean. In fact the
-                                     cleanest and the most up to standard I have ever seen.</div>
-                             </div>
-                             <div class="d-flex align-items-center">
-                                 <div class="symbol symbol-circle symbol-50px me-5">
-                                     <img src="assets/media/avatars/150-3.jpg" class="" alt="" />
-                                 </div>
-                                 <div class="flex-grow-1">
-                                     <a href="#" class="text-dark fw-bolder text-hover-primary fs-6">Janya
-                                         Clebert</a>
-                                     <span class="text-muted d-block fw-bold">Development Lead</span>
-                                 </div>
+
+
                              </div>
                          </div>
-                     </div>
-                     <div class="col-lg-4">
-                         <div
-                             class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
-                             <div class="mb-7">
-                                 <div class="rating mb-6">
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
-                                     </div>
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
-                                     </div>
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
-                                     </div>
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
-                                     </div>
-                                     <div class="rating-label me-2 checked">
-                                         <i class="bi bi-star-fill fs-5"></i>
-                                     </div>
-                                 </div>
-                                 <div class="fs-2 fw-bolder text-dark mb-3">This is by far the cleanest template
-                                     <br />and the most well structured
-                                 </div>
-                                 <div class="text-gray-500 fw-bold fs-4">The most well thought out design theme I have
-                                     ever used. The codes are up to tandard. The css styles are very clean. In fact the
-                                     cleanest and the most up to standard I have ever seen.</div>
-                             </div>
-                             <div class="d-flex align-items-center">
-                                 <div class="symbol symbol-circle symbol-50px me-5">
-                                     <img src="assets/media/avatars/150-18.jpg" class="" alt="" />
-                                 </div>
-                                 <div class="flex-grow-1">
-                                     <a href="#" class="text-dark fw-bolder text-hover-primary fs-6">Steave
-                                         Brown</a>
-                                     <span class="text-muted d-block fw-bold">Development Lead</span>
-                                 </div>
-                             </div>
+                     @endforeach
+                 </div>
+
+                 <div class="mt-5">
+                     <h4 class="text-center mb-4">Tambah Komentar</h4>
+                     <form action="{{ route('komentar.store.user') }}" method="POST" class="w-50 mx-auto">
+                         @csrf
+                         <div class="form-group mb-3">
+                             <label for="komentar" class="form-label text-dark fw-bold">Komentar Anda</label>
+                             <textarea name="komentar" class="form-control" rows="4" placeholder="Tulis komentar..." required></textarea>
                          </div>
-                     </div>
+                         <div class="form-group mb-3">
+                             <label for="rating" class="form-label text-dark fw-bold">Rating Anda</label>
+                             <select name="rating" class="form-control" required>
+                                 <option value="1">⭐</option>
+                                 <option value="2">⭐⭐</option>
+                                 <option value="3">⭐⭐⭐</option>
+                                 <option value="4">⭐⭐⭐⭐</option>
+                                 <option value="5">⭐⭐⭐⭐⭐</option>
+                             </select>
+                         </div>
+                         <button type="submit" class="btn btn-primary w-100">Kirim Komentar</button>
+                     </form>
                  </div>
              </div>
          </div>
+
+
+
+
+
+
+
      @endsection
      @section('script')
          <script>

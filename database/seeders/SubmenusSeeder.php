@@ -18,6 +18,7 @@ class SubmenusSeeder extends Seeder
         Submenu::create(['menu_id' => 1, 'nama_submenu' => 'Kategori', 'link_submenu' => 'kategori']);
         Submenu::create(['menu_id' => 1, 'nama_submenu' => 'NFT', 'link_submenu' => 'nft']);
         Submenu::create(['menu_id' => 1, 'nama_submenu' => 'Lelang', 'link_submenu' => 'lelang']);
+        Submenu::create(['menu_id' => 1, 'nama_submenu' => 'Komentar user', 'link_submenu' => 'komentar']);
         Submenu::create(['menu_id' => 1, 'nama_submenu' => 'Verifikasi User', 'link_submenu' => 'verifikasi']);
         Submenu::create(['menu_id' => 1, 'nama_submenu' => 'Apllication Settings', 'link_submenu' => 'application_settings']);
     }

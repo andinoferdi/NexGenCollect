@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Nft;
 use App\Models\Kategori;
+use App\Models\Komentar;
 use App\Models\PenawaranLelang;
 use App\Models\ApplicationSetting;
 use Illuminate\Support\Facades\Auth;
@@ -21,8 +22,8 @@ class UserpageController extends Controller
         $kategoris = Kategori::all();
         $nfts = Nft::with('kategori')->get();
         $users = User::whereHas('nfts')->with('nfts')->get(); 
-        
-        return view('userpage.index', compact('teams', 'nfts', 'kategoris',  'users'));
+        $komentars = Komentar::with('user')->get();
+        return view('userpage.index', compact('teams', 'nfts', 'kategoris', 'komentars',  'users'));
     }
 
     public function indexnft(Request $request)
@@ -89,4 +90,36 @@ class UserpageController extends Controller
 
         return redirect()->route('userpage.account_setting_user')->with('success', 'Profile updated successfully.');
     }
+
+    public function storeKomentar(Request $request)
+    {
+        $request->validate([
+            'komentar' => 'required|string|max:1000',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        Komentar::create([
+            'komentar' => $request->komentar,
+            'rating' => $request->rating,
+            'user_id' => Auth::id(),
+        ]);
+
+        return redirect()->route('userpage')->with('success', 'Komentar berhasil ditambahkan.');
+    }
+    public function deleteKomentar($id)
+{
+    $komentar = Komentar::findOrFail($id);
+
+    if ($komentar->user_id !== Auth::id()) {
+        return redirect()->route('userpage')->with('error', 'Anda tidak dapat menghapus komentar ini.');
+    }
+
+    $komentar->delete();
+
+    return redirect()->route('userpage')->with('success', 'Komentar berhasil dihapus.');
+}
+
+    
+    
+
 }

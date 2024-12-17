@@ -21,6 +21,7 @@ class SettingSubmenusSeeder extends Seeder
         SettingSubmenu::create(['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 9]);
         SettingSubmenu::create(['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 10]);
         SettingSubmenu::create(['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 11]);
+        SettingSubmenu::create(['role_id' => 1, 'menu_id' => 1, 'submenu_id' => 12]);
 
         SettingSubmenu::create(['role_id' => 2, 'menu_id' => 1, 'submenu_id' => 1]);
         SettingSubmenu::create(['role_id' => 2, 'menu_id' => 1, 'submenu_id' => 2]);

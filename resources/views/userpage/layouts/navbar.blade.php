@@ -17,10 +17,11 @@
                     </span>
                 </button>
                 <a href="{{ route('userpage') }}">
-                    <img alt="Logo" src="{{ asset('assets/media/logos/logo-landing.svg') }}"
-                        class="logo-default h-25px h-lg-30px" />
-                    <img alt="Logo" src="{{ asset('assets/media/logos/logo-landing-dark.svg') }}"
-                        class="logo-sticky h-20px h-lg-25px" />
+                    <img alt="Logo" src="{{ asset('assets/media/logos/LOGO NEXTGEN.png') }}" class="logo-default"
+                        style="height: 80px; width: auto;" />
+                    <img alt="Logo" src="{{ asset('assets/media/logos/favico.png') }}" class="logo-sticky"
+                        style="height: 60px; width: auto;" />
+
                 </a>
             </div>
             <div class="d-lg-block" id="kt_header_nav_wrapper">
@@ -59,7 +60,7 @@
                         <a href="{{ route('dashboard') }}" class="btn btn-primary me-3">Dashboard</a>
                     @else
                         <a href="{{ route('keranjang.index') }}" class="position-relative me-4">
-                            <i class="fas fa-shopping-cart text-white fs-3"></i>
+                            <i class="fas fa-shopping-cart fs-3"></i>
                             @if ($totalKeranjang > 0)
                                 <span
                                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
