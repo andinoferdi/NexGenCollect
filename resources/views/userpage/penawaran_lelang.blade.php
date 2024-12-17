@@ -14,6 +14,7 @@
 
                     @php
                         $endDate = $lelang->tanggal_akhir;
+                        $hasEnded = now() > $lelang->tanggal_akhir || $lelang->status === 'closed';
                     @endphp
                     <h1 class="text-center text-white mb-3">
                         <strong>{{ $lelang->nft->nama_nft }}</strong>
@@ -21,7 +22,13 @@
 
                     <div class="text-center mb-4">
                         <h5 class="text-white fw-bold">Lelang Berakhir Dalam:</h5>
-                        <div id="countdown" class="fw-bold text-primary fs-4"></div>
+                        <div id="countdown" class="fw-bold text-primary fs-4">
+                            @if ($hasEnded)
+                                Lelang Telah Berakhir!
+                            @else
+                                <span id="countdown-timer"></span>
+                            @endif
+                        </div>
                     </div>
 
                     @php
@@ -32,35 +39,37 @@
                             {{ number_format($highestBid, 0, ',', '.') }}</h5>
                     </div>
 
-                    @if (now() > $lelang->tanggal_akhir)
+                    @if ($hasEnded)
                         <div class="alert alert-danger text-center">
                             <p>Lelang telah berakhir. Tidak dapat memasukkan harga penawaran lagi.</p>
                         </div>
                     @else
-                        <div class="p-3 bg-light rounded shadow-sm">
-                            <form action="{{ route('penawaran.store', $lelang->id) }}" method="POST">
-                                @csrf
-                                <div class="mb-3">
-                                    <label for="harga" class="form-label fw-bold">Masukkan Harga Penawaran</label>
-                                    <input type="text" name="harga" id="harga"
-                                        class="form-control @error('harga') is-invalid @enderror"
-                                        placeholder="Masukkan harga..." oninput="this.value = this.value.rupiah()"
-                                        value="{{ old('harga', number_format($highestBid, 0, ',', '.')) }}" required
-                                        min="{{ $highestBid }}" style="border-radius: 12px;">
-                                    <small class="text-muted">Minimal harga penawaran: Rp
-                                        {{ number_format($highestBid, 0, ',', '.') }}</small>
-                                    @error('harga')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <button type="submit" class="btn btn-primary w-100 fw-bold"
-                                    style="border-radius: 12px; transition: all 0.3s ease-in-out;">
-                                    Ajukan Penawaran
-                                </button>
-                            </form>
-                        </div>
+                        @if ($lelang->status !== 'closed')
+                            <div class="p-3 bg-light rounded shadow-sm">
+                                <form action="{{ route('penawaran.store', $lelang->id) }}" method="POST">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="harga" class="form-label fw-bold">Masukkan Harga Penawaran</label>
+                                        <input type="text" name="harga" id="harga"
+                                            class="form-control @error('harga') is-invalid @enderror"
+                                            placeholder="Masukkan harga..." oninput="this.value = this.value.rupiah()"
+                                            value="{{ old('harga', number_format($highestBid, 0, ',', '.')) }}" required
+                                            min="{{ $highestBid }}" style="border-radius: 12px;">
+                                        <small class="text-muted">Minimal harga penawaran: Rp
+                                            {{ number_format($highestBid, 0, ',', '.') }}</small>
+                                        @error('harga')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100 fw-bold"
+                                        style="border-radius: 12px; transition: all 0.3s ease-in-out;">
+                                        Ajukan Penawaran
+                                    </button>
+                                </form>
+                            </div>
+                        @endif
                     @endif
 
                     <div class="mt-5">
@@ -103,30 +112,34 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const countdownElement = document.getElementById('countdown');
+            const countdownTimerElement = document.getElementById('countdown-timer');
             const endDate = new Date("{{ $endDate }}").getTime();
 
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const remainingTime = endDate - now;
+            if (!{{ $hasEnded ? 'true' : 'false' }}) {
+                // Countdown timer for ongoing auction
+                function updateCountdown() {
+                    const now = new Date().getTime();
+                    const remainingTime = endDate - now;
 
-                if (remainingTime <= 0) {
-                    countdownElement.innerHTML = "Lelang Telah Berakhir!";
-                    countdownElement.classList.remove('text-primary');
-                    countdownElement.classList.add('text-danger');
-                    clearInterval(countdownInterval);
-                    return;
+                    if (remainingTime <= 0) {
+                        countdownElement.innerHTML = "Lelang Telah Berakhir!";
+                        countdownElement.classList.remove('text-primary');
+                        countdownElement.classList.add('text-danger');
+                        clearInterval(countdownInterval);
+                        return;
+                    }
+
+                    const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+                    countdownTimerElement.innerHTML = `${days}h ${hours}j ${minutes}m ${seconds}s`;
                 }
 
-                const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-
-                countdownElement.innerHTML = `${days}h ${hours}j ${minutes}m ${seconds}s`;
+                const countdownInterval = setInterval(updateCountdown, 1000);
+                updateCountdown();
             }
-
-            const countdownInterval = setInterval(updateCountdown, 1000);
-            updateCountdown();
         });
     </script>
 @endsection

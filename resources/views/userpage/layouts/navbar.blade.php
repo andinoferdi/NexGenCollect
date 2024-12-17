@@ -58,7 +58,6 @@
                     @if ($userRole == 1 || $userRole == 3)
                         <a href="{{ route('dashboard') }}" class="btn btn-primary me-3">Dashboard</a>
                     @else
-                        <!-- Icon Keranjang -->
                         <a href="{{ route('keranjang.index') }}" class="position-relative me-4">
                             <i class="fas fa-shopping-cart text-white fs-3"></i>
                             @if ($totalKeranjang > 0)
@@ -69,7 +68,6 @@
                             @endif
                         </a>
 
-                        <!-- User Profile -->
                         <div class="cursor-pointer symbol symbol-40px" data-kt-menu-trigger="click"
                             data-kt-menu-overflow="true" data-kt-menu-placement="top-start" data-bs-toggle="tooltip"
                             data-bs-placement="right" data-bs-dismiss="click" title="User profile">
@@ -77,7 +75,6 @@
                                 alt="image" class="rounded-circle" />
                         </div>
 
-                        <!-- Dropdown Menu -->
                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
                             data-kt-menu="true">
                             <div class="menu-item px-3">
@@ -108,6 +105,9 @@
                             <div class="menu-item px-5 my-1">
                                 <a href="{{ route('userpage.verifikasi.indexuser') }}" class="menu-link px-5">Jadi
                                     Seniman</a>
+                            </div>
+                            <div class="menu-item px-5 my-1">
+                                <a href="{{ route('userpage.nft_user') }}" class="menu-link px-5"> NFT Saya</a>
                             </div>
                             <div class="menu-item px-5">
                                 <a href="{{ route('logout') }}" class="menu-link px-5"

@@ -16,6 +16,8 @@ use App\Http\Controllers\NftController;
 use App\Http\Controllers\UserVerifikasiController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PenawaranLelangController;
+use App\Http\Controllers\NftUserController;
+use App\Http\Controllers\CheckoutController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -30,18 +32,35 @@ Route::prefix('')->group(function () {
     Route::get('/', [UserpageController::class, 'index'])->name('userpage');
     Route::get('/nft', [UserpageController::class, 'indexnft'])->name('userpage.nft');
     Route::get('/nft/detail/{id}', [UserpageController::class, 'nftDetail'])->name('userpage.nft.detail');
-    Route::get('/account/setting', [UserpageController::class, 'accountsettinguser'])->name('userpage.account_setting_user');
-    Route::put('/account/update/{user}', [UserpageController::class, 'updateprofileuser'])->name('userpage.updateprofile_user');
-    Route::get('verifikasi', [UserVerifikasiController::class, 'indexUser'])->name('userpage.verifikasi.indexuser');
-    Route::post('verifikasi', [UserVerifikasiController::class, 'store'])->name('userpage.verifikasi.store');
-    Route::prefix('penawaran')->middleware(['auth'])->group(function () {
-        Route::get('/lelang/{lelangId}', [PenawaranLelangController::class, 'index'])->name('penawaran.index');
-        Route::post('/lelang/{lelangId}', [PenawaranLelangController::class, 'store'])->name('penawaran.store');
-        Route::get('/lelang/{lelangId}/highest-bid', [PenawaranLelangController::class, 'highestBid'])->name('penawaran.highestBid');
-        Route::delete('/{id}', [PenawaranLelangController::class, 'destroy'])->name('penawaran.destroy');
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/account/setting', [UserpageController::class, 'accountsettinguser'])->name('userpage.account_setting_user');
+        Route::put('/account/update/{user}', [UserpageController::class, 'updateprofileuser'])->name('userpage.updateprofile_user');
+
+        Route::get('verifikasi', [UserVerifikasiController::class, 'indexUser'])->name('userpage.verifikasi.indexuser');
+        Route::post('verifikasi', [UserVerifikasiController::class, 'store'])->name('userpage.verifikasi.store');
+
+        Route::prefix('penawaran')->group(function () {
+            Route::get('/lelang/{lelangId}', [PenawaranLelangController::class, 'index'])->name('penawaran.index');
+            Route::post('/lelang/{lelangId}', [PenawaranLelangController::class, 'store'])->name('penawaran.store');
+            Route::get('/lelang/{lelangId}/highest-bid', [PenawaranLelangController::class, 'highestBid'])->name('penawaran.highestBid');
+            Route::delete('/{id}', [PenawaranLelangController::class, 'destroy'])->name('penawaran.destroy');
+        });
+
+        Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
+        Route::post('/keranjang/checkout', [KeranjangController::class, 'checkout'])->name('keranjang.checkout');
+
+        Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+        Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+        Route::post('/midtrans/notification', [CheckoutController::class, 'notification'])->name('midtrans.notification');
+        Route::get('/checkout_sukses/{checkoutId}', [CheckoutController::class, 'simulateSuccess']);
+
+
+
+        Route::get('/nft_user', [NftUserController::class, 'index'])->name('userpage.nft_user');
     });
-    Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
 });
+
 
 Route::prefix('dashboard')->middleware('auth.custom')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
