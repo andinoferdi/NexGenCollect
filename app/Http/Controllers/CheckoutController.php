@@ -46,6 +46,12 @@ class CheckoutController extends Controller
 
         $snapToken = null;
         if ($checkout->status === 'pending') {
+            $userEmail = Auth::user()->email;
+        
+            if (empty($userEmail) || !filter_var($userEmail, FILTER_VALIDATE_EMAIL)) {
+                $userEmail = 'no-reply@example.com';
+            }
+        
             $transaction = [
                 'transaction_details' => [
                     'order_id' => 'ORDER-' . $checkout->id,
@@ -53,12 +59,11 @@ class CheckoutController extends Controller
                 ],
                 'customer_details' => [
                     'first_name' => Auth::user()->name,
-                    'email' => Auth::user()->email,
+                    'email' => $userEmail,
                 ],
             ];
             $snapToken = Snap::getSnapToken($transaction);
         }
-
         return view('userpage.checkout', compact('keranjangs', 'totalHarga', 'checkout', 'snapToken'));
     }
     public function notification(Request $request)
