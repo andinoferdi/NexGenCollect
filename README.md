@@ -1,12 +1,17 @@
 # NexGen Collect
 
+<<<<<<< HEAD
 ![NexGen Collect Logo](./assets/media/logos/logoNEXTGEN.png)
+=======
+![NexGen Collect Logo](./assets/media/logos/logo NEXTGEN.png)
+>>>>>>> 146ae35fd747761afd021a0706826d2c48be58d6
 
 NexGen Collect adalah platform berbasis web yang dibangun dengan **Laravel** yang memungkinkan pengguna untuk **mengelola**, **menampilkan**, dan **memperdagangkan** aset digital dalam bentuk **NFT (Non-Fungible Token)**. Platform ini menawarkan berbagai fitur yang mendukung **komunitas kreatif** dan **kolektor digital**, dengan sistem yang kuat dan **dashboard interaktif** untuk memudahkan analisis, manajemen aset, dan interaksi pengguna.
 
 ## Fitur Utama NexGen Collect
 
 ### 1. Manajemen Koleksi NFT
+<<<<<<< HEAD
 
 -   **Upload dan Kelola NFT**: Seniman dapat mengunggah karya mereka dalam berbagai format seperti gambar, audio, atau video.
 -   **Metadata Kustom**: Setiap karya NFT dapat memiliki metadata unik, seperti nama, deskripsi, teknik, tahun pembuatan, dan tema.
@@ -46,6 +51,39 @@ NexGen Collect adalah platform berbasis web yang dibangun dengan **Laravel** yan
 -   **Karya Eksklusif dan Edisi Terbatas**: Seniman dapat memilih untuk membuat NFT dengan edisi terbatas.
 -   **Pengaturan Aplikasi dan Keamanan**: Admin dapat mengatur berbagai preferensi aplikasi dan kebijakan keamanan platform.
 -   **User Verification**: Proses verifikasi pengguna untuk memastikan bahwa hanya pengguna terverifikasi yang dapat mengunggah dan menjual karya di platform.
+=======
+- **Upload dan Kelola NFT**: Seniman dapat mengunggah karya mereka dalam berbagai format seperti gambar, audio, atau video.
+- **Metadata Kustom**: Setiap karya NFT dapat memiliki metadata unik, seperti nama, deskripsi, teknik, tahun pembuatan, dan tema.
+
+### 2. Dashboard Interaktif
+- **Statistik dan Analitik**: Menyediakan grafik real-time untuk **NFT Terjual vs NFT Tersedia**, **Statistik Lelang**, dan **Jumlah NFT**.
+- **Grafik Lelang**: Menampilkan jumlah lelang yang sedang dibuka dan ditutup.
+- **Komentar Pengguna**: Fitur untuk berinteraksi dengan kolektor melalui komentar di setiap karya.
+
+### 3. Sistem Pelelangan
+- **Lelang NFT**: Pengguna dapat membuat lelang untuk karya mereka, dengan pengguna lain menawar dengan harga tertinggi.
+- **Bidding dan Pembayaran**: Pembayaran dilakukan melalui **Midtrans** untuk transaksi yang aman.
+
+### 4. Komunitas dan Umpan Balik
+- **Komentar Pengguna**: Pengguna dapat memberikan komentar terkait karya NFT, dan komentar tersebut akan dilihat oleh pemilik karya.
+
+### 5. Manajemen Pengguna dan Peran
+- **Role-based Access**: Platform ini memungkinkan pengelolaan pengguna dengan peran yang berbeda. Misalnya, peran **Seniman**, **Kolektor**, dan **Admin**, masing-masing dengan akses dan kontrol yang berbeda.
+- **Manajemen Pengguna**: Admin dapat mengelola daftar pengguna, mengubah peran, dan status pengguna.
+
+### 6. Integrasi Pembayaran
+- **Pembayaran dengan Midtrans**: Semua transaksi untuk NFT atau lelang dilakukan melalui **Midtrans**, memberikan opsi pembayaran yang aman dan cepat.
+- **Royalti untuk Seniman**: Seniman mendapatkan royalti setiap kali karya mereka dijual kembali di pasar sekunder.
+
+### 7. Pengaturan Aplikasi
+- **Pengaturan Tim**: Admin dapat mengelola data tim, termasuk nama tim, deskripsi, dan foto tim.
+- **Pengaturan Menu dan Submenu**: Fitur untuk mengelola menu dan submenu bagi navigasi platform yang lebih baik.
+
+### 8. Fitur Lainnya
+- **Karya Eksklusif dan Edisi Terbatas**: Seniman dapat memilih untuk membuat NFT dengan edisi terbatas.
+- **Pengaturan Aplikasi dan Keamanan**: Admin dapat mengatur berbagai preferensi aplikasi dan kebijakan keamanan platform.
+- **User Verification**: Proses verifikasi pengguna untuk memastikan bahwa hanya pengguna terverifikasi yang dapat mengunggah dan menjual karya di platform.
+>>>>>>> 146ae35fd747761afd021a0706826d2c48be58d6
 
 ---
 
@@ -95,5 +133,10 @@ Jika Anda menemukan masalah atau kerentanannya di dalam **NexGen Collect**, hara
 
 ## Dokumentasi
 
+<<<<<<< HEAD
 -   **Laporan Kinerja Tim**: [Link ke laporan](https://docs.google.com/document/d/1ubQxztUjDL01j7VQo7ZyeAz0gOldz3H8AP2fOYGDQKI/edit?usp=sharing)
 -   **UI Wireframe**: [Figma Design](https://www.figma.com/design/DrsKr2reDDyiaIhqzRHgBm/PWBF?node-id=0-1&p=f&t=sKoYEcibjvtgmnXn-0)
+=======
+- **Laporan Kinerja Tim**: [Link ke laporan](https://docs.google.com/document/d/1ubQxztUjDL01j7VQo7ZyeAz0gOldz3H8AP2fOYGDQKI/edit?usp=sharing)
+- **UI Wireframe**: [Figma Design](https://www.figma.com/design/DrsKr2reDDyiaIhqzRHgBm/PWBF?node-id=0-1&p=f&t=sKoYEcibjvtgmnXn-0)
+>>>>>>> 146ae35fd747761afd021a0706826d2c48be58d6
