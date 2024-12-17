@@ -100,27 +100,38 @@
                         </div>
                         <div class="separator my-2"></div>
                         <div class="menu-item px-5 my-1">
-                            <a href="{{ route('userpage.account_setting_user') }}" class="menu-link px-5">Account
+                            <a href="{{ route('userpage.account_setting_user') }}"
+                                class="menu-link px-5 {{ request()->routeIs('userpage.account_setting_user') ? 'active' : '' }}">Account
                                 Settings</a>
                         </div>
+
                         @if ($userRole == 2)
                             <div class="menu-item px-5 my-1">
-                                <a href="{{ route('userpage.verifikasi.indexuser') }}" class="menu-link px-5">Jadi
+                                <a href="{{ route('userpage.verifikasi.indexuser') }}"
+                                    class="menu-link px-5 {{ request()->routeIs('userpage.verifikasi.indexuser') ? 'active' : '' }}">Jadi
                                     Seniman</a>
                             </div>
                         @endif
+
                         <div class="menu-item px-5 my-1">
-                            <a href="{{ route('userpage.nft_user') }}" class="menu-link px-5"> NFT Saya</a>
+                            <a href="{{ route('userpage.nft_user') }}"
+                                class="menu-link px-5 {{ request()->routeIs('userpage.nft_user') ? 'active' : '' }}">NFT
+                                Saya</a>
                         </div>
+
                         <div class="menu-item px-5 my-1">
-                            <a href="{{ route('pesanan_saya.index') }}" class="menu-link px-5"> Pesanan Saya</a>
+                            <a href="{{ route('pesanan_saya.index') }}"
+                                class="menu-link px-5 {{ request()->routeIs('pesanan_saya.index') ? 'active' : '' }}">Pesanan
+                                Saya</a>
                         </div>
+
                         <div class="menu-item px-5">
                             <a href="{{ route('logout') }}" class="menu-link px-5"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Sign Out
                             </a>
                         </div>
+
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
