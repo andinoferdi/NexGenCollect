@@ -1,6 +1,6 @@
 # NexGen Collect
 
-![NexGen Collect Logo](./assets/media/logos/logoNEXTGEN.png)
+![NexGen Collect Logo](public/assets/media/logos/logoNEXTGEN.png)
 
 NexGen Collect adalah platform berbasis web yang dibangun dengan **Laravel** yang memungkinkan pengguna untuk **mengelola**, **menampilkan**, dan **memperdagangkan** aset digital dalam bentuk **NFT (Non-Fungible Token)**. Platform ini menawarkan berbagai fitur yang mendukung **komunitas kreatif** dan **kolektor digital**, dengan sistem yang kuat dan **dashboard interaktif** untuk memudahkan analisis, manajemen aset, dan interaksi pengguna.
 
@@ -96,9 +96,9 @@ Jika Anda menemukan masalah atau kerentanannya di dalam **NexGen Collect**, hara
 ## Dokumentasi
 
 <<<<<<< HEAD
+
+-   **Laporan Kinerja Tim**: [Link ke laporan](https://docs.google.com/document/d/1ubQxztUjDL01j7VQo7ZyeAz0gOldz3H8AP2fOYGDQKI/edit?usp=sharing)
+-   # **UI Wireframe**: [Figma Design](https://www.figma.com/design/DrsKr2reDDyiaIhqzRHgBm/PWBF?node-id=0-1&p=f&t=sKoYEcibjvtgmnXn-0)
 -   **Laporan Kinerja Tim**: [Link ke laporan](https://docs.google.com/document/d/1ubQxztUjDL01j7VQo7ZyeAz0gOldz3H8AP2fOYGDQKI/edit?usp=sharing)
 -   **UI Wireframe**: [Figma Design](https://www.figma.com/design/DrsKr2reDDyiaIhqzRHgBm/PWBF?node-id=0-1&p=f&t=sKoYEcibjvtgmnXn-0)
-=======
-- **Laporan Kinerja Tim**: [Link ke laporan](https://docs.google.com/document/d/1ubQxztUjDL01j7VQo7ZyeAz0gOldz3H8AP2fOYGDQKI/edit?usp=sharing)
-- **UI Wireframe**: [Figma Design](https://www.figma.com/design/DrsKr2reDDyiaIhqzRHgBm/PWBF?node-id=0-1&p=f&t=sKoYEcibjvtgmnXn-0)
->>>>>>> 146ae35fd747761afd021a0706826d2c48be58d6
+    > > > > > > > 146ae35fd747761afd021a0706826d2c48be58d6
