@@ -8,7 +8,7 @@
                         <span class="fw-normal fs-4 text-gray-700">
                             Email Kami di
                             <a href="mailto:andinoferdiansah@gmail.com" class="text-white opacity-50 text-hover-primary">
-                                NexGenCollect@gmail.com
+                                NextGenCollect@gmail.com
                             </a>
                         </span>
                     </div>
@@ -27,10 +27,10 @@
                 <div class="col-lg-6 ps-lg-16">
                     <div class="d-flex justify-content-center">
                         <div class="d-flex fw-bold flex-column me-20">
-                            <h4 class="fw-bolder text-gray-400 mb-6">Tentang NexGenCollect</h4>
+                            <h4 class="fw-bolder text-gray-400 mb-6">Tentang NextGenCollect</h4>
                             <a href="" class="text-white opacity-50 text-hover-primary fs-5 mb-6">FAQ</a>
                             <a href="" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Dokumentasi</a>
-                            <a href="https://github.com/andinoferdi/NexGenCollect"
+                            <a href="https://github.com/andinoferdi/NextGenCollect"
                                 class="text-white opacity-50 text-hover-primary fs-5 mb-6">Github</a>
                         </div>
                         <div class="d-flex fw-bold flex-column ms-lg-20">
@@ -63,7 +63,7 @@
                         class="h-35px h-md-40px mb-3" />
                 </a>
                 <span class="fs-6 fw-bold text-gray-600 pt-1">
-                    © 2024 NexGenCollect Inc.
+                    © 2024 NextGenCollect Inc.
                 </span>
             </div>
         </div>

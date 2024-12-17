@@ -8,7 +8,7 @@
                  <span
                      style="background: linear-gradient(to right, #ff0000 0%, #ffffff 100%);
                     -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                     <span id="kt_landing_hero_text">NexGenCollect</span>
+                     <span id="kt_landing_hero_text">NextGenCollect</span>
                  </span>
              </h1>
 
@@ -127,7 +127,7 @@
                      Tim Kami
                  </h3>
                  <div class="fs-5 text-muted fw-bold">
-                     Ini adalah Tim Pengembang NexGenCollect semua punya bidang dan keahlian masing masing
+                     Ini adalah Tim Pengembang NextGenCollect semua punya bidang dan keahlian masing masing
                  </div>
              </div>
              <div class="tns tns-default">
