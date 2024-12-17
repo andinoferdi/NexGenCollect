@@ -39,3 +39,11 @@ Jika Anda menemukan kerentanan keamanan di dalam NexGen Collect, mohon kirimkan 
 ## Lisensi
 
 NexGen Collect adalah perangkat lunak open-source yang dilisensikan di bawah [MIT license](https://opensource.org/licenses/MIT).
+
+## Dokumentasi
+
+Laporan Kinerja Tim: https://docs.google.com/document/d/1ubQxztUjDL01j7VQo7ZyeAz0gOldz3H8AP2fOYGDQKI/edit?usp=sharing
+
+UI Wireframe: https://www.figma.com/design/DrsKr2reDDyiaIhqzRHgBm/PWBF?node-id=0-1&p=f&t=sKoYEcibjvtgmnXn-0
+
+
