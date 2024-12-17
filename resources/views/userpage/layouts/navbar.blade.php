@@ -44,7 +44,6 @@
                                 data-kt-drawer-dismiss="true">NFT</a>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -58,70 +57,74 @@
 
                     @if ($userRole == 1 || $userRole == 3)
                         <a href="{{ route('dashboard') }}" class="btn btn-primary me-3">Dashboard</a>
-                    @else
-                        <a href="{{ route('keranjang.index') }}" class="position-relative me-4">
-                            <i class="fas fa-shopping-cart fs-3"></i>
-                            @if ($totalKeranjang > 0)
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {{ $totalKeranjang }}
-                                </span>
-                            @endif
-                        </a>
+                    @endif
 
-                        <div class="cursor-pointer symbol symbol-40px" data-kt-menu-trigger="click"
-                            data-kt-menu-overflow="true" data-kt-menu-placement="top-start" data-bs-toggle="tooltip"
-                            data-bs-placement="right" data-bs-dismiss="click" title="User profile">
-                            <img src="{{ Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('assets/media/avatars/blank.png') }}"
-                                alt="image" class="rounded-circle" />
-                        </div>
+                    <a href="{{ route('keranjang.index') }}" class="position-relative me-4">
+                        <i class="fas fa-shopping-cart fs-3"></i>
+                        @if ($totalKeranjang > 0)
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{ $totalKeranjang }}
+                            </span>
+                        @endif
+                    </a>
 
-                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
-                            data-kt-menu="true">
-                            <div class="menu-item px-3">
-                                <div class="menu-content d-flex align-items-center px-3">
-                                    <div class="symbol symbol-50px me-5">
-                                        <img alt="Logo"
-                                            src="{{ Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('assets/media/avatars/blank.png') }}" />
+                    <div class="cursor-pointer symbol symbol-40px" data-kt-menu-trigger="click"
+                        data-kt-menu-overflow="true" data-kt-menu-placement="top-start" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-dismiss="click" title="User profile">
+                        <img src="{{ Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('assets/media/avatars/blank.png') }}"
+                            alt="image" class="rounded-circle" />
+                    </div>
+
+                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
+                        data-kt-menu="true">
+                        <div class="menu-item px-3">
+                            <div class="menu-content d-flex align-items-center px-3">
+                                <div class="symbol symbol-50px me-5">
+                                    <img alt="Logo"
+                                        src="{{ Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('assets/media/avatars/blank.png') }}" />
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <div class="fw-bolder d-flex align-items-center fs-5">
+                                        {{ auth()->user()->name }}
+                                        <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">
+                                            {{ auth()->user()->role->nama_role }}
+                                        </span>
                                     </div>
-                                    <div class="d-flex flex-column">
-                                        <div class="fw-bolder d-flex align-items-center fs-5">
-                                            {{ auth()->user()->name }}
-                                            <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">
-                                                {{ auth()->user()->role->nama_role }}
-                                            </span>
-                                        </div>
-                                        <a href="mailto:{{ auth()->user()->email }}"
-                                            class="fw-bold text-muted text-hover-primary fs-7">
-                                            {{ auth()->user()->email }}
-                                        </a>
-                                    </div>
+                                    <a href="mailto:{{ auth()->user()->email }}"
+                                        class="fw-bold text-muted text-hover-primary fs-7">
+                                        {{ auth()->user()->email }}
+                                    </a>
                                 </div>
                             </div>
-                            <div class="separator my-2"></div>
-                            <div class="menu-item px-5 my-1">
-                                <a href="{{ route('userpage.account_setting_user') }}" class="menu-link px-5">Account
-                                    Settings</a>
-                            </div>
+                        </div>
+                        <div class="separator my-2"></div>
+                        <div class="menu-item px-5 my-1">
+                            <a href="{{ route('userpage.account_setting_user') }}" class="menu-link px-5">Account
+                                Settings</a>
+                        </div>
+                        @if ($userRole == 2)
                             <div class="menu-item px-5 my-1">
                                 <a href="{{ route('userpage.verifikasi.indexuser') }}" class="menu-link px-5">Jadi
                                     Seniman</a>
                             </div>
-                            <div class="menu-item px-5 my-1">
-                                <a href="{{ route('userpage.nft_user') }}" class="menu-link px-5"> NFT Saya</a>
-                            </div>
-                            <div class="menu-item px-5">
-                                <a href="{{ route('logout') }}" class="menu-link px-5"
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Sign Out
-                                </a>
-                            </div>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                style="display: none;">
-                                @csrf
-                            </form>
+                        @endif
+                        <div class="menu-item px-5 my-1">
+                            <a href="{{ route('userpage.nft_user') }}" class="menu-link px-5"> NFT Saya</a>
                         </div>
-                    @endif
+                        <div class="menu-item px-5 my-1">
+                            <a href="{{ route('pesanan_saya.index') }}" class="menu-link px-5"> Pesanan Saya</a>
+                        </div>
+                        <div class="menu-item px-5">
+                            <a href="{{ route('logout') }}" class="menu-link px-5"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Sign Out
+                            </a>
+                        </div>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
                 @else
                     <a href="{{ route('login') }}" class="btn btn-success">Sign In</a>
                 @endif

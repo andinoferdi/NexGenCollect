@@ -19,6 +19,7 @@ use App\Http\Controllers\PenawaranLelangController;
 use App\Http\Controllers\NftUserController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\KomentarController;
+use App\Http\Controllers\PesananSayaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [LoginController::class, 'indexlogin'])->name('login');
@@ -30,6 +31,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::prefix('')->group(function () {
     Route::get('/', [UserpageController::class, 'index'])->name('userpage');
     Route::get('/nft', [UserpageController::class, 'indexnft'])->name('userpage.nft');
+    Route::get('/nft/user/{id}', [UserpageController::class, 'userNfts'])->name('userpage.user_nfts');
     Route::get('/nft/detail/{id}', [UserpageController::class, 'nftDetail'])->name('userpage.nft.detail');
 
     Route::middleware(['auth'])->group(function () {
@@ -51,12 +53,19 @@ Route::prefix('')->group(function () {
 
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
         Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
-        Route::post('/midtrans/notification', [CheckoutController::class, 'notification'])->name('midtrans.notification');
         Route::get('/checkout_sukses/{checkoutId}', [CheckoutController::class, 'simulateSuccess']);
+
         Route::get('/nft_user', [NftUserController::class, 'index'])->name('userpage.nft_user');
+        Route::get('/nft_user/{id}', [NftUserController::class, 'show'])->name('userpage.nft_user_detail');
+
         Route::post('/komentar', [UserpageController::class, 'storeKomentar'])->name('komentar.store.user');
         Route::delete('/komentar/{id}', [UserpageController::class, 'deleteKomentar'])->name('komentar.delete.user');
+
+        Route::get('/pesanan-saya', [PesananSayaController::class, 'index'])->name('pesanan_saya.index');
     });
+
+    
+    Route::post('payments/midtrans-notification', [CheckoutController::class, 'receive']);
 });
 
 
@@ -82,5 +91,4 @@ Route::prefix('dashboard')->middleware('auth.custom')->group(function () {
     Route::resource('lelang', LelangController::class);
     Route::put('/lelang/{lelang}/stop', [LelangController::class, 'stop'])->name('lelang.stop');
     Route::resource('komentar', KomentarController::class);
-
 });

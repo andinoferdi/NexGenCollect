@@ -67,7 +67,7 @@
                                     <a href="{{ route('userpage.nft_user') }}" class="btn btn-success btn-lg">Lihat NFT
                                         Saya</a>
                                 @else
-                                    <button id="pay-button" class="btn btn-danger btn-lg">Bayar Sekarang</button>
+                                    <button id="pay-button" class="btn btn-primary btn-lg">Bayar Sekarang</button>
                                 @endif
                             </div>
                         </div>

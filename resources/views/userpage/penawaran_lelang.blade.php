@@ -4,7 +4,7 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-center">
             <div class="card shadow-lg"
-                style="border-radius: 25px; width: 600px; background: linear-gradient(to right, #000000, #ff2d31);">
+                style="border-radius: 25px; width: 600px; background: linear-gradient(to right, #ffffff, #ffffff);">
                 <div class="card-body p-4">
 
                     <div class="text-center mb-4">
@@ -16,12 +16,12 @@
                         $endDate = $lelang->tanggal_akhir;
                         $hasEnded = now() > $lelang->tanggal_akhir || $lelang->status === 'closed';
                     @endphp
-                    <h1 class="text-center text-white mb-3">
+                    <h1 class="text-center text-black mb-3">
                         <strong>{{ $lelang->nft->nama_nft }}</strong>
                     </h1>
 
                     <div class="text-center mb-4">
-                        <h5 class="text-white fw-bold">Lelang Berakhir Dalam:</h5>
+                        <h5 class="text-black fw-bold">Lelang Berakhir Dalam:</h5>
                         <div id="countdown" class="fw-bold text-primary fs-4">
                             @if ($hasEnded)
                                 Lelang Telah Berakhir!
@@ -73,7 +73,7 @@
                     @endif
 
                     <div class="mt-5">
-                        <h5 class="fw-bold text-white mb-3">Daftar Penawaran</h5>
+                        <h5 class="fw-bold text-black mb-3">Daftar Penawaran</h5>
                         @if ($penawaran->isEmpty())
                             <p class="text-center text-muted">Belum ada penawaran untuk lelang ini.</p>
                         @else

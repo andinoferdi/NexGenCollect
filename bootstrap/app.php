@@ -13,6 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
          'auth.custom' => \App\Http\Middleware\AuthMiddleware::class,
+        //  'csrf.exempt' => \App\Http\Middleware\VerifyCsrfToken::class,
+         
+        ]);
+        $middleware->validateCsrfTokens(except: [
+            'payments/midtrans-notification',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

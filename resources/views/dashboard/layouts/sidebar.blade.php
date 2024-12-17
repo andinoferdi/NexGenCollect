@@ -5,7 +5,7 @@
         <div class="aside-logo d-none d-lg-flex flex-column align-items-center flex-column-auto py-10"
             id="kt_aside_logo">
             <a href="{{ route('dashboard') }}">
-                <img alt="Logo" src="{{ asset('assets/media/logos/logo-demo7.svg') }}" class="h-35px" />
+                <img alt="Logo" src="{{ asset('assets/media/logos/favico.png') }}" class="h-55px" />
             </a>
         </div>
         <div class="aside-nav d-flex flex-column align-items-center flex-column-fluid w-100 pt-5 pt-lg-0"

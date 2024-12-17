@@ -53,9 +53,16 @@ class LelangController extends Controller
 
     public function create()
     {
-        $nfts = Nft::where('status', 'available')->get();
+        $nfts = Nft::where('status', 'available')
+            ->where(function ($query) {
+                $query->where('user_id', auth()->id())
+                    ->orWhere('user_id', 1);
+            })
+            ->get();
+
         return view('dashboard.pages.lelang.create', compact('nfts'));
     }
+
 
     public function store(Request $request)
     {
@@ -66,11 +73,11 @@ class LelangController extends Controller
         ]);
 
         $nft = Nft::where('id', $request->nft_id)
+            ->where('status', 'available')
             ->where(function ($query) {
                 $query->where('user_id', auth()->id())
                     ->orWhere('user_id', 1);
             })
-            ->where('status', 'available')
             ->first();
 
         if (!$nft) {
@@ -88,6 +95,7 @@ class LelangController extends Controller
 
         return redirect()->route('lelang.index')->with('success', 'Auction created successfully.');
     }
+
 
     public function stop(Lelang $lelang)
     {

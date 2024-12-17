@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         SettingMenusSeeder::class,
         SettingSubmenusSeeder::class,
         KategoriSeeder::class,
+        NftSeeder::class,
         ApplicationSettingsSeeder::class,
     ]);
 }

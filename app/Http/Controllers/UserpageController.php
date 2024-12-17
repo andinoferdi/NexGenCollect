@@ -34,6 +34,16 @@ class UserpageController extends Controller
         return view('userpage.nft', compact('nfts', 'kategoris'));
     }
 
+    public function userNfts($id)
+{
+    $user = User::with('nfts')->findOrFail($id);
+    $kategoris = Kategori::all();
+    $nfts = $user->nfts()->with('kategori')->get(); 
+
+    return view('userpage.user_nft', compact('user', 'nfts', 'kategoris'));
+}
+
+
     public function nftDetail($id)
     {
         $nft = Nft::with('kategori')->findOrFail($id);

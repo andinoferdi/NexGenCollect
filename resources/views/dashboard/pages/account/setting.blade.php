@@ -51,7 +51,7 @@
                     <div class="d-flex overflow-auto h-55px">
                         <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-6">
                             <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#profile_tab">Setting Tim</a>
+                                <a class="nav-link active" data-bs-toggle="tab" href="#profile_tab">Setting Akun</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#assets_tab">Asset</a>
