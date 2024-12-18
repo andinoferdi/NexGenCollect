@@ -17,51 +17,54 @@
      </div>
 
      <div class="container my-5">
-         <div class="text-center mb-4">
-             <h3 class="fs-2hx text-dark mb-5">Koleksi NFT Kami</h3>
-             <div class="btn-group" role="group" aria-label="NFT Categories">
-                 <button class="btn btn-dark filter-button" data-filter="all">Semua</button>
-                 @foreach ($kategoris as $kategori)
-                     <button class="btn btn-outline-dark filter-button" data-filter="{{ $kategori->id }}">
-                         {{ $kategori->nama_kategori }}
-                     </button>
-                 @endforeach
-             </div>
-         </div>
-
-         @if ($nfts->isEmpty())
-             <div class="text-center my-5">
-                 <h5 class="text-muted">Belum ada NFT</h5>
-             </div>
-         @else
-             <div class="row" id="nft-collection">
-                 @foreach ($nfts as $key => $nft)
-                     <div class="col-md-4 nft-item {{ $key > 2 ? 'd-none' : '' }}" data-category="{{ $nft->kategori_id }}">
-                         <div class="card shadow-sm mb-4">
-                             <img src="{{ asset('storage/' . $nft->foto) }}" class="card-img-top"
-                                 alt="{{ $nft->nama_nft }}">
-                             <div class="card-body">
-                                 <h5 class="card-title">{{ $nft->nama_nft }}</h5>
-                                 <p class="card-text text-muted">
-                                     {{ Str::limit($nft->deskripsi, 100) }}
-                                 </p>
-                                 <p class="card-text">
-                                     <span class="text-success">Harga Awal:
-                                         Rp{{ number_format($nft->harga_awal, 0, ',', '.') }}</span>
-                                 </p>
-                                 <a href="{{ route('userpage.nft.detail', $nft->id) }}" class="btn btn-primary">Lihat
-                                     Detail</a>
-                             </div>
-                         </div>
-                     </div>
-                 @endforeach
-             </div>
-
-             <div class="text-center mt-4">
-                 <a href="{{ route('userpage.nft') }}" class="btn btn-outline-primary" id="view-more">Lihat Semua</a>
-             </div>
-         @endif
-     </div>
+        <div class="text-center mb-4">
+            <h3 class="fs-2hx text-dark mb-5">Koleksi NFT Kami</h3>
+            <div class="btn-group" role="group" aria-label="NFT Categories">
+                <button class="btn btn-dark filter-button" data-filter="all">Semua</button>
+                @foreach ($kategoris as $kategori)
+                    <button class="btn btn-outline-dark filter-button" data-filter="{{ $kategori->id }}">
+                        {{ $kategori->nama_kategori }}
+                    </button>
+                @endforeach
+            </div>
+        </div>
+    
+        @if ($nfts->isEmpty())
+            <div class="text-center my-5">
+                <h5 class="text-muted">Belum ada NFT</h5>
+            </div>
+        @else
+            <div class="row" id="nft-collection">
+                @foreach ($nfts as $key => $nft)
+                    @if ($nft->status !== 'sold')
+                        <div class="col-md-4 nft-item {{ $key > 2 ? 'd-none' : '' }}" data-category="{{ $nft->kategori_id }}">
+                            <div class="card shadow-sm mb-4">
+                                <img src="{{ asset('storage/' . $nft->foto) }}" class="card-img-top"
+                                    alt="{{ $nft->nama_nft }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $nft->nama_nft }}</h5>
+                                    <p class="card-text text-muted">
+                                        {{ Str::limit($nft->deskripsi, 100) }}
+                                    </p>
+                                    <p class="card-text">
+                                        <span class="text-success">Harga Awal:
+                                            Rp{{ number_format($nft->harga_awal, 0, ',', '.') }}</span>
+                                    </p>
+                                    <a href="{{ route('userpage.nft.detail', $nft->id) }}" class="btn btn-primary">Lihat
+                                        Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+    
+            <div class="text-center mt-4">
+                <a href="{{ route('userpage.nft') }}" class="btn btn-outline-primary" id="view-more">Lihat Semua</a>
+            </div>
+        @endif
+    </div>
+    
 
      <div class="pb-15 pt-18 landing-dark-bg mt-10">
          <div class="container">
@@ -199,7 +202,7 @@
                                                  @csrf
                                                  @method('DELETE')
                                                  <button type="submit"
-                                                     class="btn btn-sm btn-danger d-flex align-items-center">
+                                                     class="btn btn-sm btn-primary d-flex align-items-center">
                                                      <i class="fas fa-trash me-1"></i> Hapus
                                                  </button>
                                              </form>
@@ -224,7 +227,7 @@
                                          @if ($komentar->balasan_admin)
                                              <div class="fs-6 mt-3">
                                                  <h5>
-                                                     <span class="text-danger">Balasan Admin:</span>
+                                                     <span class="text-primary">Balasan Admin:</span>
                                                      <span class="text-white">{{ $komentar->balasan_admin }}</span>
                                                  </h5>
                                              </div>

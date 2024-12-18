@@ -21,23 +21,25 @@
         @else
             <div class="row" id="nft-collection">
                 @foreach ($nfts as $key => $nft)
-                    <div class="col-md-4 nft-item {{ $key > 2 ? 'd-none' : '' }}" data-category="{{ $nft->kategori_id }}">
-                        <div class="card shadow-sm mb-4">
-                            <img src="{{ asset('storage/' . $nft->foto) }}" class="card-img-top" alt="{{ $nft->nama_nft }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $nft->nama_nft }}</h5>
-                                <p class="card-text text-muted">
-                                    {{ Str::limit($nft->deskripsi, 100) }}
-                                </p>
-                                <p class="card-text">
-                                    <span class="text-success">Harga Awal:
-                                        Rp{{ number_format($nft->harga_awal, 0, ',', '.') }}</span>
-                                </p>
-                                <a href="{{ route('userpage.nft.detail', $nft->id) }}" class="btn btn-primary">Lihat
-                                    Detail</a>
+                    @if ($nft->status !== 'sold')
+                        <div class="col-md-4 nft-item {{ $key > 2 ? 'd-none' : '' }}" data-category="{{ $nft->kategori_id }}">
+                            <div class="card shadow-sm mb-4">
+                                <img src="{{ asset('storage/' . $nft->foto) }}" class="card-img-top" alt="{{ $nft->nama_nft }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $nft->nama_nft }}</h5>
+                                    <p class="card-text text-muted">
+                                        {{ Str::limit($nft->deskripsi, 100) }}
+                                    </p>
+                                    <p class="card-text">
+                                        <span class="text-success">Harga Awal:
+                                            Rp{{ number_format($nft->harga_awal, 0, ',', '.') }}</span>
+                                    </p>
+                                    <a href="{{ route('userpage.nft.detail', $nft->id) }}" class="btn btn-primary">Lihat
+                                        Detail</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             </div>
         @endif

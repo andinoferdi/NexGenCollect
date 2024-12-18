@@ -96,6 +96,56 @@ class LelangController extends Controller
         return redirect()->route('lelang.index')->with('success', 'Auction created successfully.');
     }
 
+    public function edit(Lelang $lelang)
+{
+    $nfts = Nft::where('status', 'available')
+        ->orWhere('id', $lelang->nft_id)
+        ->where(function ($query) {
+            $query->where('user_id', auth()->id())
+                ->orWhere('user_id', 1);
+        })
+        ->get();
+
+    return view('dashboard.pages.lelang.edit', compact('lelang', 'nfts'));
+}
+
+public function update(Request $request, Lelang $lelang)
+{
+    $request->validate([
+        'nft_id' => 'required|exists:nfts,id',
+        'tanggal_awal' => 'required|date',
+        'tanggal_akhir' => 'required|date|after:tanggal_awal',
+    ]);
+
+    $nft = Nft::where('id', $request->nft_id)
+        ->where(function ($query) use ($lelang) {
+            $query->where('status', 'available')
+                ->orWhere('id', $lelang->nft_id);
+        })
+        ->where(function ($query) {
+            $query->where('user_id', auth()->id())
+                ->orWhere('user_id', 1);
+        })
+        ->first();
+
+    if (!$nft) {
+        return redirect()->back()->with('error', 'You cannot use this NFT for the auction.');
+    }
+
+    if ($lelang->nft_id !== $request->nft_id) {
+        $lelang->nft->update(['status' => 'available']);
+        $nft->update(['status' => 'auction']);
+    }
+
+    $lelang->update([
+        'nft_id' => $request->nft_id,
+        'tanggal_awal' => $request->tanggal_awal,
+        'tanggal_akhir' => $request->tanggal_akhir,
+    ]);
+
+    return redirect()->route('lelang.index')->with('success', 'Auction updated successfully.');
+}
+
 
     public function stop(Lelang $lelang)
     {
